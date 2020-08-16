@@ -4,6 +4,19 @@ Create a Python 3 program, which can generate a UML 2 diagram based on the sourc
 
 ### Installation
 
+Create and activate a virtual environment:
+
+
+```sh
+
+$ python -m venv venv
+
+$ source venv/bin/activate # OR venv\Scripts\Activate.ps1 for windows/PS
+
+```
+
+
+
 Install the package dependencies:
 
 ```sh
@@ -11,5 +24,7 @@ Install the package dependencies:
 $ pip install -r requirements.txt
 
 ```
+
+
 
 
