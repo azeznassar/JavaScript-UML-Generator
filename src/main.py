@@ -3,6 +3,7 @@
 from esprima import tokenize, parseScript
 from plantuml import PlantUML
 from current_cmd_a import CurrentCMD_A
+from current_cmd_b import CurrentCMD_B
 import ast
 
 pl = PlantUML(url='http://www.plantuml.com/plantuml/img/')
@@ -24,4 +25,5 @@ class Cat {
 #print(eval(compile(new_code, '', mode='eval')))
 #pl.processes_file("test.txt")
 
-CurrentCMD_A().cmdloop()
+blahh = CurrentCMD_B()
+blahh.cmdloop()
