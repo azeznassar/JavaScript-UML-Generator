@@ -1,41 +1,84 @@
 #Azez's CMD
 
+# pylint: disable="import-error"
 from command_line import CommandLine
 
 class CurrentCMD_A(CommandLine):
-    def display_output(self):
-        print("test")
 
     #For testing purposes
-    def do_greet(self, the_name):
+    # def do_greet(self, the_name):
+    #     """
+    #     Usage: greet [the_name]
+    #     Greet the named person
+    #     :parameter the_name: a string representing a person's name
+    #     :return: None
+    #     """
+    #     if the_name:
+    #         print("Hello " + the_name)
+    #     else:
+    #         print("Hello " + self.my_name)
+
+    def do_create_uml(self, args):
         """
-        Syntax: greet [the_name]
+        Usage: create_uml [-help] [-save] input output
         Greet the named person
-        :param the_name: a string representing a person's name
-        :return: None
+        :optional parameter -save: Saves JS data to SQL lite DB
+        :parameter input: Input file/directory for JS
+        :parameter output: Output directory for generated image
         """
-        if the_name:
-            print("Hello " + the_name)
+        pass
+
+
+    def help_create_uml(self): 
+        """
+        Usage: ? create_uml OR help create_uml
+        Displays info about the create_uml command
+        """
+        print('Generate UML 2 Class Diagrams from JavaScript file(s)')
+
+
+    def do_deserialize(self, args):
+        pass
+
+
+    def do_load(self, args):
+        pass
+
+
+    def do_info(self, args): 
+        print("""
+             JS2UML: Generate UML 2 Class Diagrams from JavaScript file(s)
+
+             The software was developed by Azez Nassar & Ethan Bray in Python3
+
+             Version: 0.0.1
+
+             Source: https://github.com/AzezNassar
+             """)
+    
+        #Testing purposes
+        if args:
+            print(f"!!!!!!!{args}!!!!!!!")
         else:
-            print("Hello " + self.my_name)
+            print('no arg given')
+            print(f"!!!!!!!{args}!!!!!!!")
 
-    def do_help(self):
-        pass
 
-    def do_create_uml(self):
-        pass
+    def help_introduction(self): 
+        print(""" # TODO: Create help complete file
+             JS2UML: Generate UML 2 Class Diagrams from JavaScript file(s)
 
-    def do_deserialize(self):
-        pass
+             The software has the following options/commands:
+             * help
+             * create_uml
+             * deserialize
+             * load
+             * info
+             * quit
+             * switch_cmd
+             """)
 
-    def do_load(self):
-        pass
 
-    def do_info(self):
-        pass
-
-    def do_quit(self):
-        pass
-
-    def do_switch_cmd(self):
+    def do_switch_cmd(self, args):
+        #Change args from 1 to 2?
         pass
