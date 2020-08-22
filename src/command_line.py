@@ -5,7 +5,7 @@ class CommandLine(Cmd, metaclass=ABCMeta):  # Abstract class
     def __init__(self):
         Cmd.__init__(self)
         self.prompt = ">>> "
-        self.my_name = "User"
+        self.user_name = "User"
 
     def emptyline(self):
         pass
@@ -28,4 +28,8 @@ class CommandLine(Cmd, metaclass=ABCMeta):  # Abstract class
 
     @abstractmethod
     def do_switch_cmd(self, args):
+        pass
+
+    @abstractmethod
+    def do_quit(self, args):
         pass
