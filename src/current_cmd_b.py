@@ -9,19 +9,23 @@ class CurrentCMD_B(CommandLine):
         CommandLine.__init__(self)
 
     def do_create_uml(self, args):
-        pass
+        self.current_command = "do_create_uml"
+        self.user_args = args
+        return True
 
     def do_deserialize(self, args):
         pass
 
     def do_load(self, args):
         self.current_command = "do_load"
+        return True
 
     def do_info(self, args):
         print ("Ethans info")
 
     def do_quit(self, args):
         print("Leaving System")
+        self.current_command = "do_quit"
         return True
 
     def do_switch_cmd(self, args):
