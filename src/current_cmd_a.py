@@ -5,6 +5,9 @@ from command_line import CommandLine
 
 class CurrentCMD_A(CommandLine):
 
+    def __init__(self):
+        CommandLine.__init__(self)
+
     #For testing purposes
     # def do_greet(self, the_name):
     #     """
@@ -76,8 +79,9 @@ class CurrentCMD_A(CommandLine):
 
 
     def do_switch_cmd(self, args):
-        #Change args from 1 to 2?
-        pass
+        print("Swapping to Ethan's Command Line")
+        self.current_command = "do_switch_cmd"
+        return True
 
     def do_quit(self, args):
         print("Thank you for using JS2UML")

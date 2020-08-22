@@ -1,7 +1,8 @@
 
 # Input Handler
-#from esprima import tokenize, parseScript
+from esprima import tokenize, parseScript
 from plantuml import PlantUML
+# pylint: disable="import-error"
 from current_cmd_a import CurrentCMD_A
 from current_cmd_b import CurrentCMD_B
 #import ast
@@ -47,18 +48,36 @@ class InputHandler():
     "Creates a javascript handler for given set of javascript file(s)"
 
 
+  def cmd_looper(self, current_cmd):
+    current_cmd.cmdloop()
+    if current_cmd.current_command == "do_switch_cmd":
+      current_cmd.current_command = ""
+      if current_cmd == input_handler.cmd_b:
+        current_cmd = input_handler.cmd_a
+        
+        self.cmd_looper(current_cmd)
+      else:
+        current_cmd.current_command = ""
+        current_cmd = input_handler.cmd_b
+        self.cmd_looper(current_cmd)
+
+
 if __name__ == "__main__":
   import sys
   input_handler = InputHandler()
-  system_runner = input_handler.cmd_a # Default CMD is Azez's
+  current_cmd = input_handler.cmd_a # Default CMD is Azez's
   # print(sys.argv[0]) # src\input_handler.py 0 or 1
   if len(sys.argv) > 1:
     if sys.argv[1] == "0":
-      system_runner = input_handler.cmd_a # Azez CMD
+      input_handler.cmd_looper(input_handler.cmd_a) # Azez CMD
     if sys.argv[1] == "1":
-      system_runner = input_handler.cmd_b # Ethan CMD
-  
-  system_runner.cmdloop()
+      input_handler.cmd_looper(input_handler.cmd_b) # Ethan CMD
+
+  input_handler.cmd_looper(current_cmd)
+
+
+    
+
 
 
   

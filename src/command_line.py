@@ -6,6 +6,7 @@ class CommandLine(Cmd, metaclass=ABCMeta):  # Abstract class
         Cmd.__init__(self)
         self.prompt = ">>> "
         self.user_name = "User"
+        self.current_command = ""
 
     def emptyline(self):
         pass

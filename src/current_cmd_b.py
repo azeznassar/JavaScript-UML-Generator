@@ -15,10 +15,10 @@ class CurrentCMD_B(CommandLine):
         pass
 
     def do_load(self, args):
-        self.my_input_handler.validate_javascript(args)
+        self.current_command = "do_load"
 
     def do_info(self, args):
-        return
+        print ("Ethans info")
 
     def do_quit(self, args):
         print("Leaving System")
@@ -26,7 +26,8 @@ class CurrentCMD_B(CommandLine):
 
     def do_switch_cmd(self, args):
         print("Swapping to Azez's Command Line")
-        return 0
+        self.current_command = "do_switch_cmd"
+        return True
 
     def default(self, line):
         pass
