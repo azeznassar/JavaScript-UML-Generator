@@ -1,8 +1,18 @@
+
 # Input Handler
+from esprima import tokenize, parseScript
+from plantuml import PlantUML
+from current_cmd_a import CurrentCMD_A
+from current_cmd_b import CurrentCMD_B
+import ast
 import re as regex
 
 class InputHandler():
   """Handles User Commands that require action beyond basic cmd output"""
+  
+  def __init__(self):
+    self.cmd_a = CurrentCMD_A()
+    self.cmd_b = CurrentCMD_B()
 
   #Ethan's 
   def is_file_or_dir_b(self, path: str) -> bool:
@@ -37,6 +47,18 @@ class InputHandler():
     "Creates a javascript handler for given set of javascript file(s)"
 
 
+if __name__ == "__main__":
+  import sys
+  input_handler = InputHandler()
+  system_runner = input_handler.cmd_a # Default CMD is Azez's
+  # print(sys.argv[0]) # src\input_handler.py 0 or 1
+  if len(sys.argv) > 1:
+    if sys.argv[1] == "0":
+      system_runner = input_handler.cmd_a # Azez CMD
+    if sys.argv[1] == "1":
+      system_runner = input_handler.cmd_b # Ethan CMD
+  
+  system_runner.cmdloop()
 
 
   
