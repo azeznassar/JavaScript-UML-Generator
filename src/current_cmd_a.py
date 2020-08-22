@@ -29,7 +29,9 @@ class CurrentCMD_A(CommandLine):
         :parameter input: Input file/directory for JS
         :parameter output: Output directory for generated image
         """
-        pass
+        self.current_command = "do_create_uml"
+        self.user_args = args
+        return True
 
 
     def help_create_uml(self): 

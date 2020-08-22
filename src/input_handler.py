@@ -5,6 +5,9 @@ from plantuml import PlantUML
 # pylint: disable="import-error"
 from current_cmd_a import CurrentCMD_A
 from current_cmd_b import CurrentCMD_B
+
+from javascript_handler import JavascriptHandler
+
 #import ast
 import re as regex
 
@@ -14,6 +17,7 @@ class InputHandler():
   def __init__(self):
     self.cmd_a = CurrentCMD_A()
     self.cmd_b = CurrentCMD_B()
+    # self.all_javascript = str
 
   #Ethan's 
   def is_file_or_dir_b(self, path: str) -> bool:
@@ -23,57 +27,80 @@ class InputHandler():
     else:
       return False # Is a Folder
 
-  def validate_javascript_b(self, path: str):
-    "Formats and loads the selected javascript file(s)"
-
-    if self.is_file_or_dir_b(path):
-      print(f'Loading the single file {path}')
-    
-    else:
-      print(f'Loading all files {path}')
+  # https://github.com/klen/pylama
+  def validate_javascript_b(self, input):
+    f = open(input, 'r')
+    js_file = f.read()
+    f.close()
+    return js_file
 
   #Azez's 
   def is_file_or_dir_a(self, input):
+    my_data = self.validate_javascript_a(input)
     if regex.search(".js$", input) != None:
-      return f"Your JS file {input} is being processed"
+      my_data = self.validate_javascript_a(input)
+      return f"Your JS file {input} is being processed it gave: {my_data}"
     else:
-      return f"Your directory {input} is being processed"
+      return f"Your directory {input} is being processed it gave: {my_data}"
 
+  # https://github.com/klen/pylama
   def validate_javascript_a(self, input):
-    #standardjs python package?
-    pass
+    f = open(input, 'r')
+    js_file = f.read()
+    f.close()
+    return js_file
 
   #Shared methods 
-  def handle_javascript(self):
+  def handle_javascript(self, js : str, current_cmd : str):
     "Creates a javascript handler for given set of javascript file(s)"
 
+    my_javascript = JavascriptHandler(js, current_cmd)
+    return my_javascript.extract_javascript_b()
 
-  def cmd_looper(self, current_cmd):
-    current_cmd.cmdloop()
-    if current_cmd.current_command == "do_switch_cmd":
-      current_cmd.current_command = ""
-      if current_cmd == input_handler.cmd_b:
+  def cmd_looper(self, current_cmd, output):
+    current_cmd.cmdloop(intro = output)
+
+    user_command = current_cmd.current_command
+    is_ethans = current_cmd == input_handler.cmd_b
+    #is_azezs = current_cmd == input_handler.cmd_b
+
+    # CMD Switcher
+    if user_command == "do_switch_cmd":
+      if is_ethans:
         current_cmd = input_handler.cmd_a
-        
-        self.cmd_looper(current_cmd)
       else:
-        current_cmd.current_command = ""
         current_cmd = input_handler.cmd_b
-        self.cmd_looper(current_cmd)
+      current_cmd.current_command = ""
+      self.cmd_looper(current_cmd, "CMD Switched")
 
+    # JS file checker
+    if user_command == "do_create_uml":
+      current_cmd.current_command = ""
+      if is_ethans:
+        my_data = self.validate_javascript_b(current_cmd.user_args)
+        my_ast = self.handle_javascript(my_data, "b")
+      else:
+        my_data = self.validate_javascript_a(current_cmd.user_args)
+        my_ast = self.handle_javascript(my_data, "a")
+      
+      self.cmd_looper(current_cmd, my_ast)
+
+    # Quitter
+    if user_command == "do_quit":
+      return
 
 if __name__ == "__main__":
   import sys
   input_handler = InputHandler()
-  current_cmd = input_handler.cmd_a # Default CMD is Azez's
+  current_cmd = input_handler.cmd_b # Default CMD is Ethan's
   # print(sys.argv[0]) # src\input_handler.py 0 or 1
   if len(sys.argv) > 1:
     if sys.argv[1] == "0":
-      input_handler.cmd_looper(input_handler.cmd_a) # Azez CMD
+      input_handler.cmd_looper(input_handler.cmd_a, "Running Azez's cmd") # Azez CMD
     if sys.argv[1] == "1":
-      input_handler.cmd_looper(input_handler.cmd_b) # Ethan CMD
+      input_handler.cmd_looper(input_handler.cmd_b, "Running Ethan's cmd") # Ethan CMD
 
-  input_handler.cmd_looper(current_cmd)
+  input_handler.cmd_looper(current_cmd, "Running Ethan's cmd")
 
 
     
