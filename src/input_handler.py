@@ -1,10 +1,10 @@
 
 # Input Handler
-from esprima import tokenize, parseScript
+#from esprima import tokenize, parseScript
 from plantuml import PlantUML
 from current_cmd_a import CurrentCMD_A
 from current_cmd_b import CurrentCMD_B
-import ast
+#import ast
 import re as regex
 
 class InputHandler():

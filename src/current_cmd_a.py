@@ -44,10 +44,6 @@ class CurrentCMD_A(CommandLine):
     def do_load(self, args):
         pass
 
-    def do_quit(self, args):
-        pass
-
-
     def do_info(self, args): 
         """
         Usage: info
