@@ -25,5 +25,5 @@ class Cat {
 #print(eval(compile(new_code, '', mode='eval')))
 #pl.processes_file("test.txt")
 
-blahh = CurrentCMD_B()
-blahh.cmdloop()
+#blahh = CurrentCMD_B()
+#blahh.cmdloop()
