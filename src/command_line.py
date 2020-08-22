@@ -33,3 +33,7 @@ class CommandLine(Cmd, metaclass=ABCMeta):  # Abstract class
     @abstractmethod
     def do_switch_cmd(self, args):
         pass
+
+    @abstractmethod
+    def do_quit(self, args):
+        pass

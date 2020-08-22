@@ -16,7 +16,7 @@ class CurrentCMD_A(CommandLine):
     #     if the_name:
     #         print("Hello " + the_name)
     #     else:
-    #         print("Hello " + self.my_name)
+    #         print("Hello " + self.my_name)    
 
     def do_create_uml(self, args):
         """
@@ -49,11 +49,23 @@ class CurrentCMD_A(CommandLine):
 
 
     def do_info(self, args): 
+        """
+        Usage: info
+        Displays info about the software and how to use the commands
+        """
         print("""
-             JS2UML: Generate UML 2 Class Diagrams from JavaScript file(s)
+            JS2UML: Generate UML 2 Class Diagrams from JavaScript file(s)
+
+             The software has the following options/commands:
+             * help
+             * create_uml
+             * deserialize
+             * load
+             * info
+             * quit
+             * switch_cmd
 
              The software was developed by Azez Nassar & Ethan Bray in Python3
-
              Version: 0.0.1
 
              Source: https://github.com/AzezNassar
@@ -67,21 +79,10 @@ class CurrentCMD_A(CommandLine):
             print(f"!!!!!!!{args}!!!!!!!")
 
 
-    def help_introduction(self): 
-        print(""" # TODO: Create help complete file
-             JS2UML: Generate UML 2 Class Diagrams from JavaScript file(s)
-
-             The software has the following options/commands:
-             * help
-             * create_uml
-             * deserialize
-             * load
-             * info
-             * quit
-             * switch_cmd
-             """)
-
-
     def do_switch_cmd(self, args):
         #Change args from 1 to 2?
         pass
+
+    def do_quit(self, args):
+        print("Thank you for using JS2UML")
+        return True
