@@ -1,5 +1,5 @@
 from esprima import tokenize, parseScript
-
+from dot_formatter import DotFormatter
 
 class JavascriptHandler():
     """Responsible for converting"""
@@ -12,16 +12,23 @@ class JavascriptHandler():
     def extract_javascript_a(self):
         """ 1 """
 
-    def create_puml_a(self):
-        """ 1 """
+   
 
     # Ethan method's
     def extract_javascript_b(self):
         #tokenize(self.js_code)
         return parseScript(self.js_code)
 
-    def create_puml_b(self):
-        """ 1 """
 
     # Shared method's
     
+    def create_puml(self):
+        my_dot_formatter = DotFormatter(self.js_code)
+        if self.current_cmd == "a":
+            my_dot_formatter.convert_to_dot_a()
+        else:
+            my_dot_formatter.convert_to_dot_b()
+
+            
+        my_dot_formatter.handle_dot_file(self.current_cmd)
+        
