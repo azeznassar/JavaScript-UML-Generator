@@ -62,7 +62,7 @@ class JavascriptHandler():
     # Ethan method's
     def extract_javascript_b(self):
         #tokenize(self.js_code)
-        return parseScript(self.js_code)
+        self.js_code = parseScript(self.js_code)
 
 
     # Shared method's
@@ -76,4 +76,3 @@ class JavascriptHandler():
 
             
         my_dot_formatter.handle_dot_file(self.current_cmd)
-        

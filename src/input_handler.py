@@ -53,9 +53,12 @@ class InputHandler():
   #Shared methods 
   def handle_javascript(self, js : str, current_cmd : str):
     "Creates a javascript handler for given set of javascript file(s)"
-
     my_javascript = JavascriptHandler(js, current_cmd)
-    return my_javascript.extract_javascript_a() #extract_javascript_b()
+    if current_cmd == "a":
+      return my_javascript.extract_javascript_a()
+    else:
+      return my_javascript.extract_javascript_b()
+
 
   def cmd_looper(self, current_cmd, output):
     current_cmd.cmdloop(intro = output)
@@ -78,12 +81,12 @@ class InputHandler():
       current_cmd.current_command = ""
       if is_ethans:
         my_data = self.validate_javascript_b(current_cmd.user_args)
-        my_ast = self.handle_javascript(my_data, "b")
+        my_js_classes = self.handle_javascript(my_data, "b")
       else:
         my_data = self.validate_javascript_a(current_cmd.user_args)
-        my_ast = self.handle_javascript(my_data, "a")
+        my_js_classes = self.handle_javascript(my_data, "a")
       
-      self.cmd_looper(current_cmd, my_ast)
+      self.cmd_looper(current_cmd, my_js_classes)
 
     # Quitter
     if user_command == "do_quit":
