@@ -55,9 +55,9 @@ class JavascriptHandler():
         #current_class_methods = []
 
         #my_data = my_classes, overall_class_methods, overall_class_attributes
-        return my_classes #current_class_attributes #my_classes, current_class_methods
-
-   
+        #return my_classes #current_class_attributes #my_classes, current_class_methods
+        self.js_code = my_classes
+        #return my_classes
 
     # Ethan method's
     def extract_javascript_b(self):
