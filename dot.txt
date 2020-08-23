@@ -13,6 +13,9 @@ digraph G {
                         fontsize = 8
                 ]
 
+
+
+
                 Building [
                         label = "{Building|+ name : string\l+ age : int\l|+ die() : void\l}"
                 ]

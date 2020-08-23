@@ -1,5 +1,6 @@
 # pylint: disable="import-error"
 from image_converter import ImageConverter
+from graphviz import Digraph
 
 class DotFormatter():
 
@@ -7,7 +8,6 @@ class DotFormatter():
         self.js_ast = new_js
     
     def convert_to_dot_a(self):
-
         js_data = self.js_ast
         with open("boilerplate.txt", 'r') as b:
             #d.truncate()
@@ -32,38 +32,22 @@ class DotFormatter():
             """)
 
     def convert_to_dot_b(self):
-        dot_language = """
-            digraph G {
-                fontname = "Bitstream Vera Sans"
-                fontsize = 20
+        all_js_classes = self.js_ast
+        dot_notation = ""
+        #dot = Digraph(name="G", node_attr={'shape' : 'round'}, format="png")
+        #dot.node('Animal', '{Animal|+ name : string\l+ age : int\l|+ die() : void\l}') 
+        #dot.node('Dog', '{Dog+ bark() : void\l}') 
+        #dot.node('Cat', '{Cat+ meow() : void\l}')
+        #dot_file.write(dot.source)
 
-                node [
-                        fontname = "Bitstream Vera Sans"
-                        fontsize = 10
-                        shape = "record"
-                ]
 
-                edge [
-                        fontname = "Bitstream Vera Sans"
-                        fontsize = 8
-                ]
+        for a_class in all_js_classes:
+           class_notation = f'g' 
 
-                Fish [
-                        label = "{Fish|+ name : string\l+ age : int\l|+ die() : void\l}"
-                ]
-
-                SeaDog [
-                        label = "{SeaDog||+ bark() : void\l}"
-                ]
-
-                SeaLion [
-                        label = "{SeaLion||+ meow() : void\l}"
-                ]
-            }
-        """
+        dot_notation += "\n }"
         with open("dot.txt", 'w') as dot_file:
             dot_file.truncate()
-            dot_file.write(dot_language)
+            dot_file.write(dot_notation)
 
     # Shared Methods
     def handle_dot_file(self, current_cmd):
