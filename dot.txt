@@ -1,6 +1,21 @@
 digraph G {
-	node [shape=round]
-	Animal [label="{Animal|+ name : string\l+ age : int\l|+ die() : void\l}"]
-	Dog [label="{Dog+ bark() : void\l}"]
-	Cat [label="{Cat+ meow() : void\l}"]
-}
+                fontname = "Bitstream Vera Sans"
+                fontsize = 20
+
+                node [
+                        fontname = "Bitstream Vera Sans"
+                        fontsize = 10
+                        shape = "record"
+                ]
+
+                edge [
+                        fontname = "Bitstream Vera Sans"
+                        fontsize = 8
+                ]
+
+
+
+Cat [ label = "{ Cat| catName\lcatAge\l| constructor()\lspeak()\ldisplayAge()\l }" ]
+Dog [ label = "{ Dog| dogName\ldogAge\l| constructor()\lspeak()\ldisplayAge()\l }" ]
+
+ }
