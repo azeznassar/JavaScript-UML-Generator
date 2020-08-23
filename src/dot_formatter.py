@@ -1,6 +1,7 @@
 # pylint: disable="import-error"
 from image_converter import ImageConverter
 from graphviz import Digraph
+import os
 
 class DotFormatter():
 
@@ -8,7 +9,57 @@ class DotFormatter():
         self.js_ast = new_js
     
     def convert_to_dot_a(self):
-        pass
+        os.environ["PATH"] += os.pathsep + 'D:/Program Files (x86)/Graphviz/bin/'
+        js_data = self.js_ast
+        dot = Digraph(name="G", node_attr={'shape' : 'record'}, format="png")
+        #count = 0 
+        for a_class in js_data:
+            #dot.node('Animal', '{Animal|+ name : string\l+ age : int\l|+ die() : void\l}') 
+            current_class = a_class.get("class_name")
+            current_class_attributes = a_class.get("class_attributes")
+            current_class_methods = a_class.get("class_methods")
+
+            current_class_label = '{' + current_class + '| '
+            for attribute in current_class_attributes:
+                current_class_label += f'{attribute} : string\l '
+
+            current_class_label += "| "
+
+            for method in current_class_methods:
+                current_class_label += method + "() : void\l"
+
+            current_class_label += "}"
+            #current_class_label += "| method1() : void\l}"
+
+            dot.node(current_class, current_class_label) 
+        
+        dot.render("test") 
+
+        # with open("dot.txt", 'w') as d:
+        #     d.truncate()
+        #     d.write(dot.source)
+        #js_data = self.js_ast
+        # with open("boilerplate.txt", 'r') as b:
+        #     #d.truncate()
+        #     boilerplate = b.read()
+
+        # with open("dot.txt", 'w') as d:
+        #     d.truncate()
+        #     d.write(boilerplate)
+        #     d.write("""
+        #         Building [
+        #                 label = "{Building|+ name : string\l+ age : int\l|+ die() : void\l}"
+        #         ]
+
+        #         Library [
+        #                 label = "{Library||+ bark() : void\l}"
+        #         ]
+
+        #         House [
+        #                 label = "{House||+ meow() : void\l}"
+        #         ]
+        #     }    
+        #     """)
 
     def convert_to_dot_b(self):
         all_js_classes = self.js_ast

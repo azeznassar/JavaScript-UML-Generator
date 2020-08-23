@@ -81,10 +81,10 @@ class InputHandler():
     if user_command == "do_create_uml":
       current_cmd.current_command = ""
       if is_ethans:
-        my_data = self.validate_javascript_b(current_cmd.user_args)
+        my_data = self.validate_javascript_b(current_cmd.user_args) #redund - only need  once? 
         self.handle_javascript(my_data, "b")
       else:
-        my_data = self.validate_javascript_a(current_cmd.user_args)
+        my_data = self.validate_javascript_a(current_cmd.user_args) # ^
         self.handle_javascript(my_data, "a")
       
       self.cmd_looper(current_cmd, "Converting Code...")
