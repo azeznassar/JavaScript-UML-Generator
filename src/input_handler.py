@@ -55,7 +55,7 @@ class InputHandler():
     "Creates a javascript handler for given set of javascript file(s)"
 
     my_javascript = JavascriptHandler(js, current_cmd)
-    return my_javascript.extract_javascript_b()
+    return my_javascript.extract_javascript_a() #extract_javascript_b()
 
   def cmd_looper(self, current_cmd, output):
     current_cmd.cmdloop(intro = output)

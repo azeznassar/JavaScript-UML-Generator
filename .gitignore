@@ -3,5 +3,3 @@ venv
 env
 .pytest_cache
 .coverage
-.vscode
-.vscode/settings.json
