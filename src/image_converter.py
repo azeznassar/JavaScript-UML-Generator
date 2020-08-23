@@ -8,7 +8,8 @@ class ImageConverter():
 
 
     def produce_image_a(self):
-        self.plant.processes_file("dot.txt")
+        #self.plant.processes_file("dot.txt")
+        pass
 
     def produce_image_b(self):
         self.plant.processes_file("dot.txt")
