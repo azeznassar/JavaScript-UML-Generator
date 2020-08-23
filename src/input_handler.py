@@ -55,7 +55,7 @@ class InputHandler():
     "Creates a javascript handler for given set of javascript file(s)"
     my_javascript = JavascriptHandler(js, current_cmd)
     if current_cmd == "a":
-      return my_javascript.extract_javascript_a()
+      my_javascript.extract_javascript_a()
     else:
       my_javascript.extract_javascript_b()
     my_javascript.create_puml()
@@ -82,12 +82,12 @@ class InputHandler():
       current_cmd.current_command = ""
       if is_ethans:
         my_data = self.validate_javascript_b(current_cmd.user_args)
-        my_js_classes = self.handle_javascript(my_data, "b")
+        self.handle_javascript(my_data, "b")
       else:
         my_data = self.validate_javascript_a(current_cmd.user_args)
-        my_js_classes = self.handle_javascript(my_data, "a")
+        self.handle_javascript(my_data, "a")
       
-      self.cmd_looper(current_cmd, my_js_classes)
+      self.cmd_looper(current_cmd, "Converting Code...")
 
     # Quitter
     if user_command == "do_quit":

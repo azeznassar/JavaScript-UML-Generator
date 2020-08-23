@@ -1,29 +1,6 @@
-
-            digraph G {
-                fontname = "Bitstream Vera Sans"
-                fontsize = 20
-
-                node [
-                        fontname = "Bitstream Vera Sans"
-                        fontsize = 10
-                        shape = "record"
-                ]
-
-                edge [
-                        fontname = "Bitstream Vera Sans"
-                        fontsize = 8
-                ]
-
-                Fish [
-                        label = "{Fish|+ name : string\l+ age : int\l|+ die() : void\l}"
-                ]
-
-                SeaDog [
-                        label = "{SeaDog||+ bark() : void\l}"
-                ]
-
-                SeaLion [
-                        label = "{SeaLion||+ meow() : void\l}"
-                ]
-            }
-        
+digraph G {
+	node [shape=round]
+	Animal [label="{Animal|+ name : string\l+ age : int\l|+ die() : void\l}"]
+	Dog [label="{Dog+ bark() : void\l}"]
+	Cat [label="{Cat+ meow() : void\l}"]
+}
