@@ -61,12 +61,35 @@ class JavascriptHandler():
 
     # Ethan method's
     def extract_javascript_b(self):
-        #tokenize(self.js_code)
-        self.js_code = parseScript(self.js_code)
+        js_ast = parseScript(self.js_code)
+
+        all_js_classes = []
+
+        for a_class in js_ast.body: # Where my_javascript is what esprima parses
+            class_dict = {"class_name": "",
+                        "attributes": [],
+                        "methods": []}
+
+            if a_class.type == "ClassDeclaration":
+                class_dict["class_name"] = a_class.id.name
+                
+                for a_method in a_class.body.body:
+
+                    if a_method.key.name == "constructor": # Grab Attributes of constructor                
+                        for an_expression in a_method.value.body.body:
+                            if an_expression.expression.left.object.type == "ThisExpression":
+                                class_dict["attributes"].append(an_expression.expression.left.property.name)
+                            
+                    if a_method.type == "MethodDefinition":
+                        class_dict["methods"].append(a_method.key.name)
+            
+            all_js_classes.append(class_dict)
+
+        self.js_code = all_js_classes
 
 
     # Shared method's
-    
+
     def create_puml(self):
         my_dot_formatter = DotFormatter(self.js_code)
         if self.current_cmd == "a":
