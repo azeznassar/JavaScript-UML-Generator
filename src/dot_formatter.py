@@ -7,24 +7,43 @@ class DotFormatter():
         self.js_ast = new_js
     
     def convert_to_dot_a(self):
-        current_ast = self.js_ast
-        current_class = current_ast.body[0].id.name
-        #current_attribute = current_ast.body[0].id.
-        # #DONT NEED TO WORRY ABOUT CONSTRCUTOR, JUST GET ATTRIB NAMES/types - then get method names.
-        #current_attribute_type
-        #current_method
-        return current_class
+        pass
 
     def convert_to_dot_b(self):
-        module_name = self.js_ast.body[0]
-        class_name = module_name.id.name
-        return class_name
-        
+        dot_language = """
+            digraph G {
+                fontname = "Bitstream Vera Sans"
+                fontsize = 20
 
+                node [
+                        fontname = "Bitstream Vera Sans"
+                        fontsize = 10
+                        shape = "record"
+                ]
 
+                edge [
+                        fontname = "Bitstream Vera Sans"
+                        fontsize = 8
+                ]
+
+                Fish [
+                        label = "{Fish|+ name : string\l+ age : int\l|+ die() : void\l}"
+                ]
+
+                SeaDog [
+                        label = "{SeaDog||+ bark() : void\l}"
+                ]
+
+                SeaLion [
+                        label = "{SeaLion||+ meow() : void\l}"
+                ]
+            }
+        """
+        with open("dot.txt", 'w') as dot_file:
+            dot_file.truncate()
+            dot_file.write(dot_language)
 
     # Shared Methods
-
     def handle_dot_file(self, current_cmd):
         the_image_converter = ImageConverter()
 

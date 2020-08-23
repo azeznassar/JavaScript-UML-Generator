@@ -57,7 +57,8 @@ class InputHandler():
     if current_cmd == "a":
       return my_javascript.extract_javascript_a()
     else:
-      return my_javascript.extract_javascript_b()
+      my_javascript.extract_javascript_b()
+    my_javascript.create_puml()
 
 
   def cmd_looper(self, current_cmd, output):

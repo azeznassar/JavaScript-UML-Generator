@@ -1,5 +1,4 @@
-
-            digraph G {
+digraph G {
                 fontname = "Bitstream Vera Sans"
                 fontsize = 20
 
@@ -14,16 +13,5 @@
                         fontsize = 8
                 ]
 
-                Fish [
-                        label = "{Fish|+ name : string\l+ age : int\l|+ die() : void\l}"
-                ]
 
-                SeaDog [
-                        label = "{SeaDog||+ bark() : void\l}"
-                ]
 
-                SeaLion [
-                        label = "{SeaLion||+ meow() : void\l}"
-                ]
-            }
-        
