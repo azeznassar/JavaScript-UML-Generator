@@ -63,17 +63,22 @@ class DotFormatter():
 
     def convert_to_dot_b(self):
         all_js_classes = self.js_ast
-        dot_notation = ""
-        #dot = Digraph(name="G", node_attr={'shape' : 'round'}, format="png")
-        #dot.node('Animal', '{Animal|+ name : string\l+ age : int\l|+ die() : void\l}') 
-        #dot.node('Dog', '{Dog+ bark() : void\l}') 
-        #dot.node('Cat', '{Cat+ meow() : void\l}')
-        #dot_file.write(dot.source)
 
+        with open("boilerplate.txt", "r") as boiler_plate:
+            dot_notation = boiler_plate.read()
 
         for a_class in all_js_classes:
-           class_notation = f'g' 
+            all_attributes = ''
+            all_methods = ''
+            for a_attribute in a_class["attributes"]:
+                all_attributes += "{0}\l".format(a_attribute)
 
+            for a_method in a_class["methods"]:
+                all_methods += "{0}()\l".format(a_method)
+    
+            class_notation = '{0} [ label = "{{ {0}| {1}| {2} }}" ]'.format(a_class["class_name"], all_attributes, all_methods)
+            dot_notation += f'{class_notation}\n'
+        
         dot_notation += "\n }"
         with open("dot.txt", 'w') as dot_file:
             dot_file.truncate()
