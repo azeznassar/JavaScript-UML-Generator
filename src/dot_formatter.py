@@ -17,11 +17,22 @@ class DotFormatter():
             #dot.node('Animal', '{Animal|+ name : string\l+ age : int\l|+ die() : void\l}') 
             current_class = a_class.get("class_name")
             current_class_attributes = a_class.get("class_attributes")
+            current_class_attribute_values = a_class.get("class_attribute_values")
             current_class_methods = a_class.get("class_methods")
+            #WIP
+            current_class_method_values = a_class.get("class_method_values")
+            current_class_method_params = a_class.get("class_method_params")
 
             current_class_label = '{' + current_class + '| '
             for attribute in current_class_attributes:
                 current_class_label += f'{attribute} : string\l '
+
+
+            # WORK IN PROGRESS
+            for attrib_value in current_class_attribute_values:
+                attrib_type = type(attrib_value).__name__
+                print(attrib_type)
+                print(attrib_value)
 
             current_class_label += "| "
 

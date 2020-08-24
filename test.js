@@ -1,7 +1,7 @@
 class Cat {
     constructor(catName, catAge) {
-      this.catName = catName;
-      this.catAge = catAge;
+      this.catName = 0;
+      this.catAge = "test-string";
     }
     
     speak() {

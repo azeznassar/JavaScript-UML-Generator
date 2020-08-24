@@ -21,7 +21,10 @@ class JavascriptHandler():
             current_class = {
                 "class_name": "",
                 "class_attributes": [],
-                "class_methods": []
+                "class_attribute_values": [],
+                "class_methods": [],
+                "class_method_values": [],
+                "class_method_params": []
             }
 
             current_class["class_name"] = a_class.id.name
@@ -31,21 +34,45 @@ class JavascriptHandler():
             #my_attributes = my_ast.body[count].body.body[count]
 
             current_class_methods = []
+            current_class_method_return_values = []
+            current_class_method_params = []
             current_class_attributes = []
+            current_class_attribute_values = []
             count = count + 1
-
+            method_count = 0
             for method in my_methods:
                 if method.key.name == "constructor":
+
                     for e in method.value.body.body:
                         if e.expression.left.object.type == "ThisExpression":
                             current_attribute = e.expression.left.property.name
+                            current_attribute_value = e.expression.right.value
                             current_class_attributes.append(current_attribute)
+                            current_class_attribute_values.append(current_attribute_value)
                     current_class["class_attributes"] = current_class_attributes
+                    current_class["class_attribute_values"] = current_class_attribute_values
                     overall_class_attributes.append(current_class_attributes)
-                current_class_methods.append(method.key.name)
-            current_class["class_methods"] = current_class_methods
-            #overall_class_methods.append(current_class_methods)
-            my_classes.append(current_class)
+
+                    current_class_methods.append(method.key.name)
+                    #if method.value.params != []:
+                    current_params = method.value.params
+                    #empty_list = []
+                    #if current_params != empty_list:
+                    for p in current_params:
+                        #param = p.name
+                    #print(p.name)
+                        current_class_method_params.append(p.name)
+
+                    method_count = method_count + 1
+                    for e in method.value.body.body:
+                        if e.type == "ReturnStatement":
+                            current_method_value = e.argument.value
+                            current_class_method_return_values.append(current_method_value)
+                current_class["class_methods"] = current_class_methods
+                current_class["class_method_values"] = current_class_method_return_values
+                current_class["class_method_params"] = current_class_method_params
+                #overall_class_methods.append(current_class_methods)
+                my_classes.append(current_class)
 
 
 
