@@ -58,10 +58,10 @@ class JavascriptHandler():
                     current_params = method.value.params
                     #empty_list = []
                     #if current_params != empty_list:
-                    for p in current_params:
+                    for p in current_params: 
                         #param = p.name
                     #print(p.name)
-                        current_class_method_params.append(p.name)
+                        current_class_method_params.append(p.name) # Need to link params with specific method, instead of generic to the class
 
                     method_count = method_count + 1
                     for e in method.value.body.body:

@@ -12,7 +12,7 @@ class DotFormatter():
         os.environ["PATH"] += os.pathsep + 'D:/Program Files (x86)/Graphviz/bin/'
         js_data = self.js_ast
         dot = Digraph(name="G", node_attr={'shape' : 'record'}, format="png")
-        #count = 0 
+        
         for a_class in js_data:
             #dot.node('Animal', '{Animal|+ name : string\l+ age : int\l|+ die() : void\l}') 
             current_class = a_class.get("class_name")
@@ -24,20 +24,27 @@ class DotFormatter():
             current_class_method_params = a_class.get("class_method_params")
 
             current_class_label = '{' + current_class + '| '
+            count = 0 
             for attribute in current_class_attributes:
-                current_class_label += f'{attribute} : string\l '
-
-
-            # WORK IN PROGRESS
-            for attrib_value in current_class_attribute_values:
+                #current_class_label += f'{attribute} : string\l '
+                current_class_label += f'{attribute}'
+                # WORK IN PROGRESS
+            #for attrib_value in current_class_attribute_values: 
+            # Do I want to add logic to remove the ":" if the type is of None?
+                print(current_class_attribute_values)
+                attrib_value = current_class_attribute_values[count]
                 attrib_type = type(attrib_value).__name__
-                print(attrib_type)
-                print(attrib_value)
+                #print(attrib_type)
+                    #print(attrib_value)
+                if attrib_type == "NoneType":
+                    attrib_type = ""
+                current_class_label += f' : {attrib_type}\l'
+                count = count + 1
 
             current_class_label += "| "
 
             for method in current_class_methods:
-                current_class_label += method + "() : void\l"
+                current_class_label += method + "() : void\l" #.format()
 
             current_class_label += "}"
             #current_class_label += "| method1() : void\l}"

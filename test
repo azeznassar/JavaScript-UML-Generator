@@ -1,9 +1,9 @@
 digraph G {
 	node [shape=record]
-	Cat [label="{Cat| catName : string\l catAge : string\l | constructor() : void\l}"]
-	Cat [label="{Cat| catName : string\l catAge : string\l | constructor() : void\l}"]
-	Cat [label="{Cat| catName : string\l catAge : string\l | constructor() : void\l}"]
-	Dog [label="{Dog| dogName : string\l dogAge : string\l | constructor() : void\l}"]
-	Dog [label="{Dog| dogName : string\l dogAge : string\l | constructor() : void\l}"]
-	Dog [label="{Dog| dogName : string\l dogAge : string\l | constructor() : void\l}"]
+	Cat [label="{Cat| catName : int\lcatAge : str\l| constructor() : void\l}"]
+	Cat [label="{Cat| catName : int\lcatAge : str\l| constructor() : void\l}"]
+	Cat [label="{Cat| catName : int\lcatAge : str\l| constructor() : void\l}"]
+	Dog [label="{Dog| dogName : \ldogAge : \l| constructor() : void\l}"]
+	Dog [label="{Dog| dogName : \ldogAge : \l| constructor() : void\l}"]
+	Dog [label="{Dog| dogName : \ldogAge : \l| constructor() : void\l}"]
 }
