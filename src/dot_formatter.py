@@ -4,7 +4,7 @@ from graphviz import Digraph
 import os
 
 class DotFormatter():
-
+        
     def __init__(self, new_js):
         self.js_ast = new_js
     
@@ -22,16 +22,18 @@ class DotFormatter():
             #WIP
             current_class_method_values = a_class.get("class_method_values")
             current_class_method_params = a_class.get("class_method_params")
-
+            current_class_associations = a_class.get("class_associations")
+            #print(current_class_associations)
             current_class_label = '{' + current_class + '| '
             count = 0 
+            #relationships = ""
             for attribute in current_class_attributes:
                 #current_class_label += f'{attribute} : string\l '
                 current_class_label += f'{attribute}'
                 # WORK IN PROGRESS
             #for attrib_value in current_class_attribute_values: 
             # Do I want to add logic to remove the ":" if the type is of None?
-                print(current_class_attribute_values)
+                #print(current_class_attribute_values)
                 attrib_value = current_class_attribute_values[count]
                 attrib_type = type(attrib_value).__name__
                 #print(attrib_type)
@@ -43,8 +45,14 @@ class DotFormatter():
 
             current_class_label += "| "
 
-            for method in current_class_methods:
+            for method in current_class_methods: # Do for method return types like I did for attribute types - WIP - 
                 current_class_label += method + "() : void\l" #.format()
+
+            for relationship in current_class_associations:
+                #relationships += "{0} -> {1}\n".format(current_class, relationship)
+                print(relationship)
+                dot.edge(current_class, relationship)
+
 
             current_class_label += "}"
             #current_class_label += "| method1() : void\l}"
