@@ -1,12 +1,14 @@
 class Cat {
     constructor(catName, catAge) {
       this.catName = "";
-      this.catAge = "";
+      this.catAge = true;
     }
     
     speak() {
       console.log(`${this.catName} makes a noise.`);
       dog = new Dog("Name", 123)
+
+      return 34
     }
 
     displayAge() {
@@ -22,6 +24,8 @@ class Dog {
   
   speak() {
     console.log(`${this.dogName} makes a noise.`);
+
+    return "MyString"
   }
 
   displayAge() {

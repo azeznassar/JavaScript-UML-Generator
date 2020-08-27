@@ -44,13 +44,16 @@ class DotFormatter():
                 count = count + 1
 
             current_class_label += "| "
-
+            count = 0
+            #print(current_class_method_values)
             for method in current_class_methods: # Do for method return types like I did for attribute types - WIP - 
-                current_class_label += method + "() : void\l" #.format()
+                #print(current_class_method_values)
+                current_class_label += method + f"() : {current_class_method_values[count]}\l" #.format()
+                count = count + 1
 
             for relationship in current_class_associations:
                 #relationships += "{0} -> {1}\n".format(current_class, relationship)
-                print(relationship)
+                #print(relationship)
                 dot.edge(current_class, relationship)
 
 

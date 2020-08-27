@@ -24,7 +24,7 @@ class JavascriptHandler():
                 "class_attribute_values": [],
                 "class_methods": [],
                 "class_method_values": [],
-                "class_method_params": [],
+                "class_method_params": [], #MAKE INTO DICT
                 "class_associations": []
             }
 
@@ -43,7 +43,7 @@ class JavascriptHandler():
             count = count + 1
             method_count = 0
             for method in my_methods:
-
+                current_method_value = ""
                 #if method.key.name == "constructor":
 
             
@@ -57,10 +57,13 @@ class JavascriptHandler():
                             current_class_attributes.append(current_attribute)
                             current_class_attribute_values.append(current_attribute_value)
 
-
-                    elif type(e.expression.right) != type(None) and e.expression.right.type == "NewExpression":
-                        #print(e.expression.right.callee.name)
-                        current_class["class_associations"].append(e.expression.right.callee.name)
+                    #print(e.expression)
+                    if e.expression != None:
+                        if e.expression.right != None:
+                            #print(e.expression.right)
+                            if e.expression.right.type == "NewExpression":
+                            #print(e.expression.right.callee.name)
+                                current_class["class_associations"].append(e.expression.right.callee.name)
 
                 current_class["class_attributes"] = current_class_attributes
                 current_class["class_attribute_values"] = current_class_attribute_values
@@ -78,16 +81,21 @@ class JavascriptHandler():
                     current_class_method_params.append(p.name) # Need to link params with specific method, instead of generic to the class
 
                 method_count = method_count + 1
+
                 for e in method.value.body.body:
                     if e.type == "ReturnStatement":
-                        current_method_value = e.argument.value
-                        current_class_method_return_values.append(current_method_value)
+                        current_method_value = type(e.argument.value).__name__
+
+                    if current_method_value == "":
+                        current_method_value = "void"
+                #print(current_method_value)
+                current_class_method_return_values.append(current_method_value)
 
  
 
-                current_class["class_methods"] = current_class_methods
-                current_class["class_method_values"] = current_class_method_return_values
-                current_class["class_method_params"] = current_class_method_params
+            current_class["class_methods"] = current_class_methods
+            current_class["class_method_values"] = current_class_method_return_values
+            current_class["class_method_params"] = current_class_method_params
                 #overall_class_methods.append(current_class_methods)
             my_classes.append(current_class)
 
