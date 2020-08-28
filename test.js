@@ -4,8 +4,8 @@ class Cat {
       this.catAge = true;
     }
     
-    speak() {
-      console.log(`${this.catName} makes a noise.`);
+    speak(words) {
+      console.log(`${this.catName} wants to say: ${words}`);
       dog = new Dog("Name", 123)
 
       return 34

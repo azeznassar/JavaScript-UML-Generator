@@ -24,7 +24,7 @@ class JavascriptHandler():
                 "class_attribute_values": [],
                 "class_methods": [],
                 "class_method_values": [],
-                "class_method_params": [], #MAKE INTO DICT
+                "class_method_params": {}, #MAKE INTO DICT
                 "class_associations": []
             }
 
@@ -36,7 +36,7 @@ class JavascriptHandler():
 
             current_class_methods = []
             current_class_method_return_values = []
-            current_class_method_params = []
+            current_class_method_params = {}
             current_class_attributes = []
             current_class_attribute_values = []
             current_class_associations = []
@@ -73,12 +73,19 @@ class JavascriptHandler():
                 current_class_methods.append(method.key.name)
                 #if method.value.params != []:
                 current_params = method.value.params
+                #print(current_params)
                 #empty_list = []
                 #if current_params != empty_list:
+                #if method.key.name != "constructor":
+                current_class_method_params[f'{method.key.name}'] = []
                 for p in current_params: 
-                    #param = p.name
-                #print(p.name)
-                    current_class_method_params.append(p.name) # Need to link params with specific method, instead of generic to the class
+                        #param = p.name
+                    #print(p.name)
+                    #print(method.key.name)
+
+                    current_class_method_params[f'{method.key.name}'].append(p.name)
+                    #current_class_method_params.update({ f'{method.key.name}': p.name }) # Need to link params with specific method, instead of generic to the class
+                #print(current_class_method_params)
 
                 method_count = method_count + 1
 
@@ -95,6 +102,7 @@ class JavascriptHandler():
 
             current_class["class_methods"] = current_class_methods
             current_class["class_method_values"] = current_class_method_return_values
+            #print(current_class_method_params)
             current_class["class_method_params"] = current_class_method_params
                 #overall_class_methods.append(current_class_methods)
             my_classes.append(current_class)

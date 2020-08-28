@@ -46,9 +46,15 @@ class DotFormatter():
             current_class_label += "| "
             count = 0
             #print(current_class_method_values)
-            for method in current_class_methods: # Do for method return types like I did for attribute types - WIP - 
+            for method in current_class_methods: # 
                 #print(current_class_method_values)
-                current_class_label += method + f"() : {current_class_method_values[count]}\l" #.format()
+                current_class_label += method #.format()
+                method_params = ""
+                for param in current_class_method_params[method]:
+                    method_params += param + ', '
+                    #print(param)
+                
+                current_class_label += f"({method_params}) : {current_class_method_values[count]}\l" #.format()
                 count = count + 1
 
             for relationship in current_class_associations:
