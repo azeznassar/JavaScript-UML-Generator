@@ -23,6 +23,7 @@ class DotFormatter():
             current_class_method_values = a_class.get("class_method_values")
             current_class_method_params = a_class.get("class_method_params")
             current_class_associations = a_class.get("class_associations")
+            current_class_parent = a_class.get("class_parent")
             #print(current_class_associations)
             current_class_label = '{' + current_class + '| '
             count = 0 
@@ -61,7 +62,11 @@ class DotFormatter():
                 #relationships += "{0} -> {1}\n".format(current_class, relationship)
                 #print(relationship)
                 dot.edge(current_class, relationship)
+                #dot.body.append(f'\t{current_class} -> {relationship} [ arrowhead = none ]')
+                # Use above code if I want to change arrowhead for basic associations
 
+            if current_class_parent != "":
+                dot.body.append(f'\t{current_class} -> {current_class_parent} [ arrowhead = onormal ]')
 
             current_class_label += "}"
             #current_class_label += "| method1() : void\l}"

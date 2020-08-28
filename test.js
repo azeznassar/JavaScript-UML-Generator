@@ -1,7 +1,7 @@
 class Cat {
     constructor(catName, catAge) {
       this.catName = "";
-      this.catAge = true;
+      this.catAge = 20;
     }
     
     speak(words) {
@@ -16,7 +16,19 @@ class Cat {
     }
 }
 
-class Dog {
+class Animal {
+  constructor(name, age, isADog) {
+    this.dogName = "test-string";
+    this.dogAge = 0;
+    this.isADog = false;
+  }
+
+  walk() {
+    console.log("walking")
+  }
+}
+
+class Dog extends Animal {
   constructor(dogName, dogAge) {
     this.dogName = "test-string";
     this.dogAge = 0;

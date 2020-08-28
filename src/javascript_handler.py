@@ -12,6 +12,7 @@ class JavascriptHandler():
     def extract_javascript_a(self):
         """ 1 """ 
         my_ast = parseScript(self.js_code)
+        #print(my_ast)
         my_classes = []
         overall_class_attributes = []
         count = 0
@@ -25,7 +26,8 @@ class JavascriptHandler():
                 "class_methods": [],
                 "class_method_values": [],
                 "class_method_params": {}, #MAKE INTO DICT
-                "class_associations": []
+                "class_associations": [],
+                "class_parent": ""
             }
 
             current_class["class_name"] = a_class.id.name
@@ -40,8 +42,14 @@ class JavascriptHandler():
             current_class_attributes = []
             current_class_attribute_values = []
             current_class_associations = []
+            
             count = count + 1
             method_count = 0
+
+            if a_class.superClass != None:
+                current_class["class_parent"] = a_class.superClass.name
+                #print(current_class["class_parent"])
+
             for method in my_methods:
                 current_method_value = ""
                 #if method.key.name == "constructor":
