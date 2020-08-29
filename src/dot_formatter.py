@@ -4,7 +4,7 @@ from graphviz import Digraph
 import os
 
 class DotFormatter():
-
+        
     def __init__(self, new_js):
         self.js_ast = new_js
     
@@ -12,21 +12,61 @@ class DotFormatter():
         os.environ["PATH"] += os.pathsep + 'D:/Program Files (x86)/Graphviz/bin/'
         js_data = self.js_ast
         dot = Digraph(name="G", node_attr={'shape' : 'record'}, format="png")
-        #count = 0 
+        
         for a_class in js_data:
             #dot.node('Animal', '{Animal|+ name : string\l+ age : int\l|+ die() : void\l}') 
             current_class = a_class.get("class_name")
             current_class_attributes = a_class.get("class_attributes")
+            current_class_attribute_values = a_class.get("class_attribute_values")
             current_class_methods = a_class.get("class_methods")
-
+            #WIP
+            current_class_method_values = a_class.get("class_method_values")
+            current_class_method_params = a_class.get("class_method_params")
+            current_class_associations = a_class.get("class_associations")
+            current_class_parent = a_class.get("class_parent")
+            #print(current_class_associations)
             current_class_label = '{' + current_class + '| '
+            count = 0 
+            #relationships = ""
             for attribute in current_class_attributes:
-                current_class_label += f'{attribute} : string\l '
+                #current_class_label += f'{attribute} : string\l '
+                current_class_label += f'{attribute}'
+                # WORK IN PROGRESS
+            #for attrib_value in current_class_attribute_values: 
+            # Do I want to add logic to remove the ":" if the type is of None?
+                #print(current_class_attribute_values)
+                attrib_value = current_class_attribute_values[count]
+                attrib_type = type(attrib_value).__name__
+                #print(attrib_type)
+                    #print(attrib_value)
+                if attrib_type == "NoneType":
+                    attrib_type = ""
+                current_class_label += f' : {attrib_type}\l'
+                count = count + 1
 
             current_class_label += "| "
+            count = 0
+            #print(current_class_method_values)
+            for method in current_class_methods: # 
+                #print(current_class_method_values)
+                current_class_label += method #.format()
+                method_params = ""
+                for param in current_class_method_params[method]:
+                    method_params += param + ', '
+                    #print(param)
+                
+                current_class_label += f"({method_params}) : {current_class_method_values[count]}\l" #.format()
+                count = count + 1
 
-            for method in current_class_methods:
-                current_class_label += method + "() : void\l"
+            for relationship in current_class_associations:
+                #relationships += "{0} -> {1}\n".format(current_class, relationship)
+                #print(relationship)
+                dot.edge(current_class, relationship)
+                #dot.body.append(f'\t{current_class} -> {relationship} [ arrowhead = none ]')
+                # Use above code if I want to change arrowhead for basic associations
+
+            if current_class_parent != "":
+                dot.body.append(f'\t{current_class} -> {current_class_parent} [ arrowhead = onormal ]')
 
             current_class_label += "}"
             #current_class_label += "| method1() : void\l}"
