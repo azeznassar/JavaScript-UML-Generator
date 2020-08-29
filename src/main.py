@@ -26,104 +26,59 @@ class Cat {
 #pl.processes_file("test.txt")
 
 #current_cmd = CurrentCMD_B()
-#current_cmd = CurrentCMD_A()
-#current_cmd.cmdloop()
 
-my_ast = parseScript("""
-class Cat {
-    constructor(catName, catAge) {
-      this.catName = 0;
-      this.catAge = "";
-    }
+all_js_classes = []
+
+
+with open("test.js", 'r') as js_file:
+  js_ast = js_file.read()
+  js_ast = parseScript(js_ast)
+
+
+for a_class in js_ast.body: # Where my_javascript is what esprima parses
+  class_dict = {"class_name": "",
+              "attributes": [],
+              "attribute_types": [],
+              "methods": [],
+              "class_calls": [],
+              "inherits_from": ""}
+
+  if a_class.type == "ClassDeclaration":
+    class_dict["class_name"] = a_class.id.name
+
+    if a_class.superClass != None:
+      class_dict["inherits_from"] = a_class.superClass.name  
+      
+    for a_method in a_class.body.body:
+        new_method = {"name" : "", "parameters": [], "return_type" : ""}
+
+        if a_method.type == "MethodDefinition": # if the type of expression is a method, add its name to methods array                    
+            new_method["name"] = a_method.key.name
+            for a_param in a_method.value.params:
+                new_method["parameters"].append(a_param.name)
+
+        for an_expression in a_method.value.body.body:
+
+            if an_expression.type == "ReturnStatement":
+                    new_method["return_type"] = f' : {type(an_expression.argument.value).__name__}'
+            
+            if an_expression.expression != None:
+                left_value = an_expression.expression.left
+                right_value = an_expression.expression.right                         
+
+                if a_method.key.name == "constructor": # Grab Attributes of constructor
+                    if left_value.object.type == "ThisExpression":
+                        class_dict["attributes"].append(left_value.property.name)
+                        # Grabs attribute types - Gives empty string if no type value given
+                        attribute_value = right_value.value
+                        if type(attribute_value) == type(None):
+                            value_type = ""
+                        else:
+                            value_type = f' : {type(attribute_value).__name__}'
+                        class_dict["attribute_types"].append(value_type)
+
+                if right_value.type == "NewExpression":
+                    class_dict["class_calls"].append(right_value.callee.name)
+        class_dict["methods"].append(new_method)
     
-    speak() {
-      console.log(`${this.catName} makes a noise.`);
-    }
-
-    displayAge() {
-      console.log(`${this.catName} is ${this.catAge}.`);
-    }
-}
-
-class Dog {
-  constructor(dogName, dogAge) {
-    this.dogName = dogName;
-    this.dogAge = dogAge;
-  }
-  
-  speak(myParam, myOtherParam) {
-    console.log(`${this.dogName} makes a noise.`);
-
-    return "thisisastring"
-  }
-
-  displayAge() {
-    console.log(`${this.dogName} is ${this.dogAge}.`);
-
-    return 19
-  }
-}
-""")
-my_classes = []
-overall_class_attributes = []
-count = 0
-
-for a_class in my_ast.body:
-
-  current_class = {
-          "class_name": "",
-          "class_attributes": [],
-          "class_attribute_values": [],
-           "class_methods": [],
-           "class_method_values": [],
-           "class_method_params": []
-  }
-
-  current_class["class_name"] = a_class.id.name
-
-       #my_classes.append(a_class.id.name)
-  my_methods = my_ast.body[count].body.body
-        #my_attributes = my_ast.body[count].body.body[count]
-
-  current_class_methods = []
-  current_class_method_return_values = []
-  current_class_method_params = []
-  current_class_attributes = []
-  current_class_attribute_values = []
-  count = count + 1
-  method_count = 0 
-  for method in my_methods:
-    if method.key.name == "constructor":
-      for e in method.value.body.body:
-        if e.expression.left.object.type == "ThisExpression":
-          current_attribute = e.expression.left.property.name
-          current_attribute_value = e.expression.right.value
-          current_class_attributes.append(current_attribute)
-          current_class_attribute_values.append(current_attribute_value)
-      current_class["class_attributes"] = current_class_attributes
-      current_class["class_attribute_values"] = current_class_attribute_values
-      overall_class_attributes.append(current_class_attributes)
-
-    current_class_methods.append(method.key.name)
-    #if method.value.params != []:
-    current_params = method.value.params
-    #empty_list = []
-    #if current_params != empty_list:
-    for p in current_params:
-        #param = p.name
-      print(p.name)
-      current_class_method_params.append(p.name)
-
-    method_count = method_count + 1
-    for e in method.value.body.body:
-      if e.type == "ReturnStatement":
-        current_method_value = e.argument.value
-        current_class_method_return_values.append(current_method_value)
-  current_class["class_methods"] = current_class_methods
-  current_class["class_method_values"] = current_class_method_return_values
-  current_class["class_method_params"] = current_class_method_params
-            #overall_class_methods.append(current_class_methods)
-  my_classes.append(current_class)
-print(my_classes)
-#print(my_ast.body)
-#print(my_ast.body[1].body.body.type) to do - params !
+  all_js_classes.append(class_dict)

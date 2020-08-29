@@ -34,6 +34,6 @@ class CurrentCMD_B(CommandLine):
         return True
 
     def default(self, line):
-        pass
+        print (f"Sorry, the command: '{line}' was not recognized, type info to learn about all commands")
 
     

@@ -103,23 +103,35 @@ class DotFormatter():
 
     def convert_to_dot_b(self):
         all_js_classes = self.js_ast
-
+        dot_relationships = ''
         with open("boilerplate.txt", "r") as boiler_plate:
             dot_notation = boiler_plate.read()
 
         for a_class in all_js_classes:
             all_attributes = ''
             all_methods = ''
-            for a_attribute in a_class["attributes"]:
-                all_attributes += "{0}\l".format(a_attribute)
+            all_relationships = ''
 
+            for a_attribute, a_attribute_type in zip(a_class["attributes"], a_class["attribute_types"]):
+                all_attributes += "{0} {1} \l".format(a_attribute, a_attribute_type)
+            
             for a_method in a_class["methods"]:
-                all_methods += "{0}()\l".format(a_method)
+                all_parameters = ''
+                for a_parameter in a_method["parameters"]:
+                    all_parameters += f"{a_parameter}, "
+                all_methods += '{0}({1}){2}\l'.format(a_method["name"], all_parameters, a_method["return_type"])
+
+            for a_relationship in a_class["class_calls"]:
+                all_relationships += f'{a_class["class_name"]} -> {a_relationship}\n'
+
+            if a_class["inherits_from"] != "":
+                all_relationships += f'{a_class["class_name"]} -> {a_class["inherits_from"]} [arrowhead = onormal]\n'
     
             class_notation = '{0} [ label = "{{ {0}| {1}| {2} }}" ]'.format(a_class["class_name"], all_attributes, all_methods)
             dot_notation += f'{class_notation}\n'
+            dot_relationships += all_relationships
         
-        dot_notation += "\n }"
+        dot_notation += f"{dot_relationships} \n }}"
         with open("dot.txt", 'w') as dot_file:
             dot_file.truncate()
             dot_file.write(dot_notation)
