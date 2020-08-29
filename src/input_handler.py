@@ -5,7 +5,7 @@ from plantuml import PlantUML
 # pylint: disable="import-error"
 from current_cmd_a import CurrentCMD_A
 from current_cmd_b import CurrentCMD_B
-
+from serializer import Serializer
 from javascript_handler import JavascriptHandler
 
 #import ast
@@ -76,11 +76,17 @@ class InputHandler():
   #Shared methods 
   def handle_javascript(self, js : str, current_cmd : str):
     "Creates a javascript handler for given set of javascript file(s)"
+
     my_javascript = JavascriptHandler(js, current_cmd)
+    my_serializer = Serializer()
+
     if current_cmd == "a":
       my_javascript.extract_javascript_a()
+      my_serializer.serialize_a(my_javascript.js_code)
     else:
       my_javascript.extract_javascript_b()
+      my_serializer.serialize_b(my_javascript.js_code)
+
     my_javascript.create_puml()
 
   def cmd_looper(self, current_cmd, output):
@@ -110,6 +116,16 @@ class InputHandler():
         self.handle_javascript(my_data, "a")
       
       self.cmd_looper(current_cmd, "Converting Code...")
+
+    if user_command == "do_deserialize":
+      my_serializer = Serializer() # WRAP in try / catch
+      deserialize_args = current_cmd.user_args
+      if is_ethans:
+        my_serializer.deserializer_b(deserialize_args)
+      else:
+        my_serializer.deserializer_a(deserialize_args)
+
+      self.cmd_looper(current_cmd, "deserialized data has been printed \n")
 
     # Quitter
     if user_command == "do_quit":

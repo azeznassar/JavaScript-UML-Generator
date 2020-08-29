@@ -21,10 +21,6 @@ class CommandLine(Cmd, metaclass=ABCMeta):  # Abstract class
         pass
 
     @abstractmethod
-    def do_load(self, args):
-        pass
-
-    @abstractmethod
     def do_info(self, args):
         pass
 
