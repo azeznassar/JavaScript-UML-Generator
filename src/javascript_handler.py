@@ -175,7 +175,7 @@ class JavascriptHandler():
                                         value_type = f' : {type(attribute_value).__name__}'
                                     class_dict["attribute_types"].append(value_type)
 
-                            if right_value.type == "NewExpression":
+                            if right_value != None and right_value.type == "NewExpression":
                                 class_dict["class_calls"].append(right_value.callee.name)
                     class_dict["methods"].append(new_method)
             
