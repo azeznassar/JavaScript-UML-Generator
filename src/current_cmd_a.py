@@ -2,6 +2,7 @@
 
 # pylint: disable="import-error"
 from command_line import CommandLine
+from serializer import Serializer
 
 class CurrentCMD_A(CommandLine):
 
@@ -43,11 +44,9 @@ class CurrentCMD_A(CommandLine):
 
 
     def do_deserialize(self, args):
-        pass
-
-
-    def do_load(self, args):
-        pass
+        self.current_command = "do_deserialize"
+        self.user_args = args
+        return True
 
     def do_info(self, args): 
         """
