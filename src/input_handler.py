@@ -48,30 +48,32 @@ class InputHandler():
     return all_js_code
 
   #Azez's 
-  def is_file_or_dir_a(self, input):
-    if path.isfile(input):
-      if regex.search(".js$", input) != None:
-        my_js_file = [input]
-        return self.validate_javascript_a(my_js_file)
+  def is_file_or_dir_a(self, user_input):
+    is_file = path.isfile(user_input)
+    is_dir = path.isdir(user_input)
 
-    elif path.isdir(input):
-      all_js_files = []
-      for subdir, dirs, files in walk(input):
+    if is_file:
+      if regex.search(".js$", user_input) != None:
+        return self.validate_javascript_a([user_input])
+
+    elif is_dir:
+      js_files = []
+      for subdir, dirs, files in walk(user_input):
         for f in files:
-          a_file = f'{subdir}\\{f}'
-          if regex.search(".js$", a_file) != None:
-            all_js_files.append(a_file)
-      return self.validate_javascript_a(all_js_files)
+          current_file = subdir + "\\" + f
+          if regex.search(".js$", current_file) != None:
+            js_files.append(current_file)
+      return self.validate_javascript_a(js_files)
 
   # https://github.com/klen/pylama
-  def validate_javascript_a(self, all_js_files):
-    all_js_code = ""
-    for a_file in all_js_files:
-      with open(a_file) as js_file:
+  def validate_javascript_a(self, js_files):
+    js_code = ""
+    for f in js_files:
+      with open(f) as js_file:
         js = js_file.read()
-        all_js_code += f'{js} \n'
+        js_code += js + ' \n'
 
-    return all_js_code
+    return js_code
 
   #Shared methods 
   def handle_javascript(self, js : str, current_cmd : str):

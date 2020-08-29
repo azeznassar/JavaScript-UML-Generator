@@ -7,20 +7,7 @@ from serializer import Serializer
 class CurrentCMD_A(CommandLine):
 
     def __init__(self):
-        CommandLine.__init__(self)
-
-    #For testing purposes
-    # def do_greet(self, the_name):
-    #     """
-    #     Usage: greet [the_name]
-    #     Greet the named person
-    #     :parameter the_name: a string representing a person's name
-    #     :return: None
-    #     """
-    #     if the_name:
-    #         print("Hello " + the_name)
-    #     else:
-    #         print("Hello " + self.my_name)    
+        CommandLine.__init__(self) 
 
     def do_create_uml(self, args):
         """
@@ -51,33 +38,60 @@ class CurrentCMD_A(CommandLine):
     def do_info(self, args): 
         """
         Usage: info
-        Displays info about the software and how to use the commands
+        Displays information about the software, such as version number and authors. 
         """
         print("""
             JS2UML: Generate UML 2 Class Diagrams from JavaScript file(s)
 
-             The software has the following options/commands:
-             * help
-             * create_uml
-             * deserialize
-             * load
-             * info
-             * quit
-             * switch_cmd
+            The software was developed by Azez Nassar & Ethan Bray in Python3
+            Version: 0.0.1
 
-             The software was developed by Azez Nassar & Ethan Bray in Python3
-             Version: 0.0.1
-
-             Source: https://github.com/AzezNassar
+            Source: https://github.com/azeznassar/JavaScript-UML-Generator
              """)
-    
-        #Testing purposes
-        if args:
-            print(f"!!!!!!!{args}!!!!!!!")
-        else:
-            print('no arg given')
-            print(f"!!!!!!!{args}!!!!!!!")
 
+
+
+    def do_help(self, args):
+        print("""
+                ================================================
+                create_uml deserialize info switch_cmd help exit
+
+
+                create_uml:
+                    usage: create_uml js_input
+                    Generate an image of an UML class diagram from inputted JavaScript source code file(s)
+
+                positional arguments:
+                    js_input	input JavaScript file or directory of JavaScript files
+
+
+                deserialize:
+                    usage: deserialize [-delete]
+                    Display the deserialized JavaScript class information that is serialized from the create_uml command
+
+                optional arguments:
+                    -d		Deletes the serialized data file after deserializing and display it
+
+
+                info:
+                    usage: info
+                    Displays information about the software, such as version number and authors.
+
+
+                switch_cmd:
+                    usage: switch_cmd
+                    Switchs from the current cmd implementation to the other available implementation. (all commands are the same)
+
+
+                help:
+                    usage: help
+                    Displays help information about each available command, such as, usage and possible arguments
+
+
+                exit:
+                    usage: exit
+                    Exits from the program 
+        """)
 
     def do_switch_cmd(self, args):
         print("Swapping to Ethan's Command Line")
