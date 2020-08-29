@@ -15,8 +15,10 @@ digraph G {
 
 
 
-Part [ label = "{ Part| | constructor(param1, param2, ) : str\lbark() : str\lrun(param7, param8, ) : str\l }" ]
-Whole [ label = "{ Whole| | CreatePart(param3, param4, ) : int\lrun(param5, param6, ) : str\lboo()\l }" ]
-Part -> Whole [arrowhead = onormal]
+Cat [ label = "{ Cat| catName  : str \lcatAge  : int \l| constructor(catName, catAge, )\lspeak(words, ) : int\ldisplayAge()\l }" ]
+Animal [ label = "{ Animal| dogName  : str \ldogAge  : int \lisADog  : bool \l| constructor(name, age, isADog, )\lwalk()\l }" ]
+Dog [ label = "{ Dog| dogName  : str \ldogAge  : int \l| constructor(dogName, dogAge, )\lspeak() : str\ldisplayAge()\l }" ]
+Cat -> Dog
+Dog -> Animal [arrowhead = onormal]
  
  }
