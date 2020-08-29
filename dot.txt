@@ -1,4 +1,22 @@
+digraph G {
+                fontname = "Bitstream Vera Sans"
+                fontsize = 20
+
+                node [
+                        fontname = "Bitstream Vera Sans"
+                        fontsize = 10
+                        shape = "record"
+                ]
+
+                edge [
+                        fontname = "Bitstream Vera Sans"
+                        fontsize = 8
+                ]
 
 
 
-
+Part [ label = "{ Part| | constructor(param1, param2, ) : str\lbark() : str\lrun(param7, param8, ) : str\l }" ]
+Whole [ label = "{ Whole| | CreatePart(param3, param4, ) : int\lrun(param5, param6, ) : str\lboo()\l }" ]
+Part -> Whole [arrowhead = onormal]
+ 
+ }

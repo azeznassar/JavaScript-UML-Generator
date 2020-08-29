@@ -1,29 +1,27 @@
-class Cat {
-    constructor(catName, catAge) {
-      this.catName = catName;
-      this.catAge = catAge;
-    }
-    
-    speak() {
-      console.log(`${this.catName} makes a noise.`);
+class Part extends Whole{
+  constructor(param1, param2) {
+    return "blahh one"
+  }
+    bark() {
+      return "blahh"
     }
 
-    displayAge() {
-      console.log(`${this.catName} is ${this.catAge}.`);
-    }
+  run(param7, param8) {
+    return "Bk"
+  }
 }
 
-class Dog {
-  constructor(dogName, dogAge) {
-    this.dogName = dogName;
-    this.dogAge = dogAge;
-  }
-  
-  speak() {
-    console.log(`${this.dogName} makes a noise.`);
+class Whole {
+  CreatePart(param3, param4) {
+    return 10
   }
 
-  displayAge() {
-    console.log(`${this.dogName} is ${this.dogAge}.`);
+  run(param5, param6) {
+    return "j"
   }
+
+  boo() {
+  }
+
+
 }
