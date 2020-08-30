@@ -92,6 +92,6 @@ python src/inputhandler.py [0] or [1]
             usage: exit
             Exits from the program 
 
-
-
-
+ <p align="center"> 
+    <img src="https://i.imgur.com/pe00DnH.gif" alt="Demo of command usage">
+ </p>
