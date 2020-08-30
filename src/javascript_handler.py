@@ -1,3 +1,4 @@
+
 from esprima import tokenize, parseScript
 from dot_formatter import DotFormatter
 
@@ -191,7 +192,5 @@ class JavascriptHandler():
         if self.current_cmd == "a":
             my_dot_formatter.convert_to_dot_a()
         else:
-            my_dot_formatter.convert_to_dot_b()
-
-            
-        my_dot_formatter.handle_dot_file(self.current_cmd)
+            my_dot_formatter.convert_to_dot_b() 
+            my_dot_formatter.handle_dot_file(self.current_cmd)
