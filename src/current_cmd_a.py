@@ -1,14 +1,15 @@
 
-#Azez's CMD
+# Azez's CMD
 
 # pylint: disable="import-error"
 from command_line import CommandLine
 from serializer import Serializer
 
+
 class CurrentCMD_A(CommandLine):
 
     def __init__(self):
-        CommandLine.__init__(self) 
+        CommandLine.__init__(self)
 
     def do_create_uml(self, args):
         """
@@ -22,7 +23,7 @@ class CurrentCMD_A(CommandLine):
         self.user_args = args
         return True
 
-    def help_create_uml(self): 
+    def help_create_uml(self):
         """
         Usage: ? create_uml OR help create_uml
         Displays info about the create_uml command
@@ -34,10 +35,11 @@ class CurrentCMD_A(CommandLine):
         self.user_args = args
         return True
 
-    def do_info(self, args): 
+    def do_info(self, args):
         """
         Usage: info
-        Displays information about the software, such as version number and authors. 
+        Displays information about the software,
+        such as version number and authors.
         """
         print("""
             JS2UML: Generate UML 2 Class Diagrams from JavaScript file(s)
@@ -56,38 +58,45 @@ class CurrentCMD_A(CommandLine):
 
                 create_uml:
                     usage: create_uml js_input
-                    Generate an image of an UML class diagram from inputted JavaScript source code file(s)
+                    Generate an image of an UML class diagram
+                    from inputted JavaScript source code file(s)
 
                 positional arguments:
-                    js_input	input JavaScript file or directory of JavaScript files
+                    js_input	input JavaScript file / dirs
 
 
                 deserialize:
                     usage: deserialize [-d]
-                    Display the deserialized JavaScript class information that is serialized from the create_uml command
+                    Display the deserialized JavaScript class 
+                    information that is serialized from the create_uml command
 
                 optional arguments:
-                    -d		Deletes the serialized data file after deserializing and display it
+                    -d		Deletes the serialized data file 
+                            after deserializing and display it
 
 
                 info:
                     usage: info
-                    Displays information about the software, such as version number and authors.
+                    Displays information about the software, 
+                    such as version number and authors.
 
 
                 switch_cmd:
                     usage: switch_cmd
-                    Switchs from the current cmd implementation to the other available implementation. (all commands are the same)
+                    Switchs from the current cmd implementation
+                    to the other available implementation. 
+                    (all commands are the same)
 
 
                 help:
                     usage: help
-                    Displays help information about each available command, such as, usage and possible arguments
+                    Displays help information about each available 
+                    command, such as, usage and possible arguments
 
 
                 quit:
                     usage: quit
-                    Exits from the program 
+                    Exits from the program
         """)
 
     def do_switch_cmd(self, args):
