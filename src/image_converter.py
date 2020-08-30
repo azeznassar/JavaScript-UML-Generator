@@ -1,6 +1,7 @@
 
 from plantuml import PlantUML
 
+
 class ImageConverter():
 
     def __init__(self):
@@ -8,4 +9,3 @@ class ImageConverter():
 
     def produce_image_b(self):
         self.plant.processes_file("uml.txt")
-
