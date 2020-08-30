@@ -5,10 +5,19 @@ By Azez Nassar & Ethan Bray
 ## Problem Domain
 Create a Python 3 program, which can generate a UML 2 diagram based on the source code of an ES6+ (ECMAScript  2015+) program  in  a  file/files  under  a  directory  by  using  Python  package(s).
 
-## Installation
+## Installation / Setup
+
+Clone the repo:
+
+```sh
+
+$ git clone https://github.com/azeznassar/JavaScript-UML-Generator.git
+
+$ cd JavaScript-UML-Generator
+
+```
 
 Create and activate a virtual environment:
-
 
 ```sh
 
@@ -27,7 +36,7 @@ $ pip install -r requirements.txt
 
 ```
 
-Install the NPM dependency (pyexecjs):
+Install the NPM dependency (standardjs):
 
 ```sh
 
@@ -35,17 +44,25 @@ $ npm install
 
 ```
 
+Run the program:
+
+```sh
+
+$ python src/input_handler.py
+
+```
+
 ## Usage
 
 ```sh
-python src/inputhandler.py [0] or [1]
+python src/input_handler.py [0] or [1]
 ```
 0 and 1 are optional arguments which start the program within Azez's or Ethan's implementation (Opens within Azez's by default when no argument is given)
 
 #### Commands
 
     =========================================================================
-    available commands: create_uml, deserialize, info, switch_cmd, help, exit
+    available commands: create_uml, deserialize, info, switch_cmd, help, quit
 
 
     create_uml:
@@ -80,8 +97,8 @@ python src/inputhandler.py [0] or [1]
             Displays help information about each available command, such as, usage and possible arguments
 
 
-    exit:
-            usage: exit
+    quit:
+            usage: quit
             Exits from the program 
 
  <p align="center"> 

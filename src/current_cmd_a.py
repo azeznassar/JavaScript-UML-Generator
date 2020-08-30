@@ -22,14 +22,12 @@ class CurrentCMD_A(CommandLine):
         self.user_args = args
         return True
 
-
     def help_create_uml(self): 
         """
         Usage: ? create_uml OR help create_uml
         Displays info about the create_uml command
         """
         print('Generate UML 2 Class Diagrams from JavaScript file(s)')
-
 
     def do_deserialize(self, args):
         self.current_command = "do_deserialize"
@@ -45,12 +43,10 @@ class CurrentCMD_A(CommandLine):
             JS2UML: Generate UML 2 Class Diagrams from JavaScript file(s)
 
             The software was developed by Azez Nassar & Ethan Bray in Python3
-            Version: 0.0.1
+            Version: 1.0
 
             Source: https://github.com/azeznassar/JavaScript-UML-Generator
              """)
-
-
 
     def do_help(self, args):
         print("""
@@ -89,8 +85,8 @@ class CurrentCMD_A(CommandLine):
                     Displays help information about each available command, such as, usage and possible arguments
 
 
-                exit:
-                    usage: exit
+                quit:
+                    usage: quit
                     Exits from the program 
         """)
 

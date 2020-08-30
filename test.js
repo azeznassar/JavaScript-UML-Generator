@@ -5,8 +5,7 @@ class Cat {
   }
 
   speak (words) {
-    console.log(`${this.catName} wants to say: ${words}`)
-    dog = new Dog('Name', 123)
+    let dog = new Dog('Name', 123)
 
     return 34
   }
