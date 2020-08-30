@@ -1,21 +1,17 @@
 
 # Input Handler
-from esprima import tokenize, parseScript
-from plantuml import PlantUML
+
 # pylint: disable="import-error"
 from current_cmd_a import CurrentCMD_A
 from current_cmd_b import CurrentCMD_B
-from serializer import Serializer
 from javascript_handler import JavascriptHandler
-
-#import ast
-import re as regex
-
+# 3rd party imports
+from serializer import Serializer
+from esprima import tokenize, parseScript
+from plantuml import PlantUML
+from re import search
 from os import walk, path
-
 from execjs import get
-import os
-
 
 class InputHandler():
   """Handles User Commands that require action beyond basic cmd output"""
@@ -28,7 +24,7 @@ class InputHandler():
   #Ethan's 
   def is_file_or_dir_b(self, input: str):
     if path.isfile(input):
-      if regex.search(".js$", input) != None:
+      if search(".js$", input) != None:
         my_js_file = [input]
         return self.validate_javascript_b(my_js_file)
 
@@ -37,18 +33,41 @@ class InputHandler():
       for subdir, dirs, files in walk(input):
         for f in files:
           a_file = f'{subdir}\\{f}'
-          if regex.search(".js$", a_file) != None:
+          if search(".js$", a_file) != None:
             all_js_files.append(a_file)
       return self.validate_javascript_b(all_js_files)
    
-  def validate_javascript_b(self, all_js_files):
-    all_js_code = ""
-    for a_file in all_js_files:
-      with open(a_file) as js_file:
-        js = js_file.read()
-        all_js_code += f'{js} \n'
+  def validate_javascript_b(self, js_file_list):
+    node_runner = get('Node')
+    
+    for a_single_file in js_file_list:
+      javascript_program = node_runner.compile('''
+          module.paths.push('%s');
+          standard_package = require('standard');
 
-    return all_js_code
+          function validateMyJS() {
+            return standard_package.lintTextSync('%s')
+          }
+
+      ''' % (path.join(path.dirname(__file__),'node_modules') , a_single_file))
+
+      standard_data = javascript_program.call('validateMyJS')
+
+      if standard_data['results'][0]['messages'] != None:
+        for error in standard_data['results'][0]['messages']:
+          print("Error Located: " + error['message'])
+
+      print(f"Error Count: {standard_data['errorCount']}")
+      print(f"Warning Count: {standard_data['warningCount']} \n")
+
+    all_javascript_string = ""
+    for a_file in js_file_list:
+      with open(a_file) as js_file:
+        js_code = js_file.read()
+        all_javascript_string += f"{js_code}\n"
+
+    print("Files Have been Validated by Standard JS \n")
+    return all_javascript_string
 
   #Azez's 
   def is_file_or_dir_a(self, user_input):
@@ -56,7 +75,7 @@ class InputHandler():
     is_dir = path.isdir(user_input)
 
     if is_file:
-      if regex.search(".js$", user_input) != None:
+      if search(".js$", user_input) != None:
         return self.validate_javascript_a([user_input])
 
     elif is_dir:
@@ -64,7 +83,7 @@ class InputHandler():
       for subdir, dirs, files in walk(user_input):
         for f in files:
           current_file = subdir + "\\" + f
-          if regex.search(".js$", current_file) != None:
+          if search(".js$", current_file) != None:
             js_files.append(current_file)
       return self.validate_javascript_a(js_files)
 
@@ -81,7 +100,7 @@ class InputHandler():
             return s.lintTextSync('%s')
           }
 
-      ''' % (os.path.join(os.path.dirname(__file__),'node_modules') , current_file))
+      ''' % (path.join(path.dirname(__file__),'node_modules') , current_file))
 
       validation_results = context.call('lintJS')
       error_count = validation_results['errorCount']
@@ -165,7 +184,7 @@ class InputHandler():
 if __name__ == "__main__":
   import sys
   input_handler = InputHandler()
-  current_cmd = input_handler.cmd_a # Default CMD is Ethan's
+  current_cmd = input_handler.cmd_b # Default CMD is Ethan's
   # print(sys.argv[0]) # src\input_handler.py 0 or 1
   if len(sys.argv) > 1:
     if sys.argv[1] == "0":
@@ -173,7 +192,7 @@ if __name__ == "__main__":
     if sys.argv[1] == "1":
       input_handler.cmd_looper(input_handler.cmd_b, "Running Ethan's cmd") # Ethan CMD
 
-  input_handler.cmd_looper(current_cmd, "Running Azez's cmd")
+  input_handler.cmd_looper(current_cmd, "Running Ethan's cmd")
 
 
     

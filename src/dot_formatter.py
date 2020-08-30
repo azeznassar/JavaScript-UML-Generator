@@ -1,7 +1,8 @@
+
 # pylint: disable="import-error"
 from image_converter import ImageConverter
 from graphviz import Digraph
-import os
+from os import pathsep, environ 
 
 class DotFormatter():
         
@@ -9,7 +10,7 @@ class DotFormatter():
         self.js_ast = new_js
     
     def convert_to_dot_a(self):
-        os.environ["PATH"] += os.pathsep + 'D:/Program Files (x86)/Graphviz/bin/'
+        environ["PATH"] += pathsep + 'D:/Program Files (x86)/Graphviz/bin/'
         js_data = self.js_ast
         dot = Digraph(name="G", node_attr={'shape' : 'record'}, format="png")
         
@@ -75,32 +76,6 @@ class DotFormatter():
         
         dot.render("uml") 
 
-        # with open("dot.txt", 'w') as d:
-        #     d.truncate()
-        #     d.write(dot.source)
-        #js_data = self.js_ast
-        # with open("boilerplate.txt", 'r') as b:
-        #     #d.truncate()
-        #     boilerplate = b.read()
-
-        # with open("dot.txt", 'w') as d:
-        #     d.truncate()
-        #     d.write(boilerplate)
-        #     d.write("""
-        #         Building [
-        #                 label = "{Building|+ name : string\l+ age : int\l|+ die() : void\l}"
-        #         ]
-
-        #         Library [
-        #                 label = "{Library||+ bark() : void\l}"
-        #         ]
-
-        #         House [
-        #                 label = "{House||+ meow() : void\l}"
-        #         ]
-        #     }    
-        #     """)
-
     def convert_to_dot_b(self):
         all_js_classes = self.js_ast
         dot_relationships = ''
@@ -139,9 +114,5 @@ class DotFormatter():
     # Shared Methods
     def handle_dot_file(self, current_cmd):
         the_image_converter = ImageConverter()
-
-        if current_cmd == "a":
-            the_image_converter.produce_image_a()
-        else:
-            the_image_converter.produce_image_b()
+        the_image_converter.produce_image_b()
 

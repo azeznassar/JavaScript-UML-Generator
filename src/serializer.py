@@ -1,5 +1,6 @@
-import pickle
-import shelve
+
+from pickle import dump, load
+from shelve import open as o
 from os import remove
 
 class Serializer():
@@ -7,15 +8,15 @@ class Serializer():
         self.serialized_data = "serialized.p"
 
     def serialize_a(self, data):
-        with shelve.open(self.serialized_data, 'c') as shelf:
+        with o(self.serialized_data, 'c') as shelf:
             shelf["js_class_data"] = data
 
     def serialize_b(self, data):
         with open(self.serialized_data, 'wb') as pfile:
-            pickle.dump(data, pfile)
+            dump(data, pfile)
 
     def deserializer_a(self, args):
-        with shelve.open(self.serialized_data, 'r') as shelf:
+        with o(self.serialized_data, 'r') as shelf:
             for key in shelf.keys():
                 print(repr(key), repr(shelf[key]))
         if "-d" in args:
@@ -25,7 +26,7 @@ class Serializer():
 
     def deserializer_b(self, args):
         with open(self.serialized_data, 'rb') as pfile:
-            print(pickle.load(pfile))
+            print(load(pfile))
 
         if "-d" in args:
             remove(self.serialized_data)

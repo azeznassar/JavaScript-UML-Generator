@@ -15,7 +15,10 @@ digraph G {
 
 
 
+Cat [ label = "{ Cat| catName  : str \lcatAge  : int \l| constructor(catName, catAge, )\lspeak(words, ) : int\ldisplayAge()\l }" ]
 Animal [ label = "{ Animal| dogName  : str \ldogAge  : int \lisADog  : bool \l| constructor(name, age, isADog, )\lwalk()\l }" ]
-Ok [ label = "{ Ok| dogName  : str \ldogAge  : int \lisADog  : bool \l| constructor(name, age, isADog, )\lwalk()\l }" ]
+Dog [ label = "{ Dog| dogName  : str \ldogAge  : int \l| constructor(dogName, dogAge, )\lspeak() : str\ldisplayAge()\l }" ]
+Cat -> Dog
+Dog -> Animal [arrowhead = onormal]
  
  }
