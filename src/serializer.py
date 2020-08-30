@@ -1,13 +1,15 @@
 
 from pickle import dump, load
 from shelve import open as o
-from os import remove
+from os import remove, path
 
 class Serializer():
     def __init__(self):
         self.serialized_data = "serialized.p"
 
     def serialize_a(self, data):
+        if path.isfile(self.serialized_data):
+            remove(self.serialized_data)
         with o(self.serialized_data, 'c') as shelf:
             shelf["js_class_data"] = data
 

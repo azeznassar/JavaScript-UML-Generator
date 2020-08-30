@@ -1,0 +1,8 @@
+digraph G {
+	node [shape=record]
+	Cat -> Dog
+	Cat [label="{Cat| catName : str\lcatAge : int\l| constructor(catName, catAge, ) : void\lspeak(words, ) : int\ldisplayAge() : void\l}"]
+	Animal [label="{Animal| dogName : str\ldogAge : int\lisADog : bool\l| constructor(name, age, isADog, ) : void\lwalk() : void\l}"]
+	Dog -> Animal [ arrowhead = onormal ]
+	Dog [label="{Dog| dogName : str\ldogAge : int\l| constructor(dogName, dogAge, ) : void\lspeak() : str\ldisplayAge() : void\l}"]
+}

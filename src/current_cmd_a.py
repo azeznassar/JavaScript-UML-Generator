@@ -101,4 +101,5 @@ class CurrentCMD_A(CommandLine):
 
     def do_quit(self, args):
         print("Thank you for using JS2UML")
+        self.current_command = "do_quit"
         return True
