@@ -73,7 +73,7 @@ class DotFormatter():
 
             dot.node(current_class, current_class_label) 
         
-        dot.render("test") 
+        dot.render("uml") 
 
         # with open("dot.txt", 'w') as d:
         #     d.truncate()
@@ -132,7 +132,7 @@ class DotFormatter():
             dot_relationships += all_relationships
         
         dot_notation += f"{dot_relationships} \n }}"
-        with open("dot.txt", 'w') as dot_file:
+        with open("uml.txt", 'w') as dot_file:
             dot_file.truncate()
             dot_file.write(dot_notation)
 

@@ -12,5 +12,5 @@ class ImageConverter():
         pass
 
     def produce_image_b(self):
-        self.plant.processes_file("dot.txt")
+        self.plant.processes_file("uml.txt")
 

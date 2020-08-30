@@ -13,6 +13,10 @@ import re as regex
 
 from os import walk, path
 
+from execjs import get
+import os
+
+
 class InputHandler():
   """Handles User Commands that require action beyond basic cmd output"""
   
@@ -37,7 +41,6 @@ class InputHandler():
             all_js_files.append(a_file)
       return self.validate_javascript_b(all_js_files)
    
-  # https://github.com/klen/pylama
   def validate_javascript_b(self, all_js_files):
     all_js_code = ""
     for a_file in all_js_files:
@@ -65,8 +68,34 @@ class InputHandler():
             js_files.append(current_file)
       return self.validate_javascript_a(js_files)
 
-  # https://github.com/klen/pylama
   def validate_javascript_a(self, js_files):
+    runtime = get('Node')
+
+    print("Validating JavaScript file(s)")
+    for current_file in js_files:
+      context = runtime.compile('''
+          module.paths.push('%s');
+          s = require('standard');
+
+          function lintJS() {
+            return s.lintTextSync('%s')
+          }
+
+      ''' % (os.path.join(os.path.dirname(__file__),'node_modules') , current_file))
+
+      validation_results = context.call('lintJS')
+      error_count = validation_results['errorCount']
+      warning_count = validation_results['warningCount']
+
+      if validation_results['results'][0]['messages'] != None:
+        error_messages = validation_results['results'][0]['messages']
+        for error in error_messages:
+          print("Error Found.")
+          print("Error Message: " + error['message'])
+
+      print("Error Count: " + str(error_count))
+      print("Warning Count: " + str(warning_count) + '\n')
+
     js_code = ""
     for f in js_files:
       with open(f) as js_file:
@@ -117,7 +146,7 @@ class InputHandler():
         my_data = self.is_file_or_dir_a(current_cmd.user_args)
         self.handle_javascript(my_data, "a")
       
-      self.cmd_looper(current_cmd, "Converting Code...")
+      self.cmd_looper(current_cmd, "UML Diagram generated ./uml.png")
 
     if user_command == "do_deserialize":
       my_serializer = Serializer() # WRAP in try / catch
@@ -136,7 +165,7 @@ class InputHandler():
 if __name__ == "__main__":
   import sys
   input_handler = InputHandler()
-  current_cmd = input_handler.cmd_b # Default CMD is Ethan's
+  current_cmd = input_handler.cmd_a # Default CMD is Ethan's
   # print(sys.argv[0]) # src\input_handler.py 0 or 1
   if len(sys.argv) > 1:
     if sys.argv[1] == "0":
@@ -144,7 +173,7 @@ if __name__ == "__main__":
     if sys.argv[1] == "1":
       input_handler.cmd_looper(input_handler.cmd_b, "Running Ethan's cmd") # Ethan CMD
 
-  input_handler.cmd_looper(current_cmd, "Running Ethan's cmd")
+  input_handler.cmd_looper(current_cmd, "Running Azez's cmd")
 
 
     
