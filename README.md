@@ -52,45 +52,45 @@ python src/inputhandler.py [0] or [1]
 
 #### Commands
 
-            =========================================================================
-            available commands: create_uml, deserialize, info, switch_cmd, help, exit
+    =========================================================================
+    available commands: create_uml, deserialize, info, switch_cmd, help, exit
 
 
-            create_uml:
-                usage: create_uml js_input
-                Generate an image of an UML class diagram from inputted JavaScript source code file(s)
+    create_uml:
+            usage: create_uml js_input
+            Generate an image of an UML class diagram from inputted JavaScript source code file(s)
 
             positional arguments:
                 js_input	input JavaScript file or directory of JavaScript files
 
 
-            deserialize:
-                usage: deserialize [-d]
-                Display the deserialized JavaScript class information that is serialized from the create_uml command
+    deserialize:
+            usage: deserialize [-d]
+            Display the deserialized JavaScript class information that is serialized from the create_uml command
 
             optional arguments:
                 -d		Deletes the serialized data file after deserializing and display it
 
 
-            info:
-                usage: info
-                Displays information about the software, such as version number and authors.
+    info:
+            usage: info
+            Displays information about the software, such as version number and authors.
 
 
-            switch_cmd:
-                usage: switch_cmd
-                Switchs from the current cmd implementation to the other available implementation.
-                (all commands are the same)
+    switch_cmd:
+            usage: switch_cmd
+            Switchs from the current cmd implementation to the other available implementation.
+            (all commands are the same)
 
 
-            help:
-                usage: help
-                Displays help information about each available command, such as, usage and possible arguments
+    help:
+            usage: help
+            Displays help information about each available command, such as, usage and possible arguments
 
 
-            exit:
-                usage: exit
-                Exits from the program 
+    exit:
+            usage: exit
+            Exits from the program 
 
 
 
