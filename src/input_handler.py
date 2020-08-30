@@ -12,6 +12,7 @@ from plantuml import PlantUML
 from re import search
 from os import walk, path
 from execjs import get
+from sys import argv
 
 class InputHandler():
   """Handles User Commands that require action beyond basic cmd output"""
@@ -158,14 +159,23 @@ class InputHandler():
     # JS file checker
     if user_command == "do_create_uml":
       current_cmd.current_command = ""
+      output = "UML Diagram generated ./uml.png"
+      type_error_output = f"Make sure you select at least one Javascript file. There was a type error: "
       if is_ethans:
-        my_data = self.is_file_or_dir_b(current_cmd.user_args)
-        self.handle_javascript(my_data, "b")
+        try:
+          my_data = self.is_file_or_dir_b(current_cmd.user_args)
+          self.handle_javascript(my_data, "b")
+        except TypeError as type_error:
+          output = type_error_output + str(type_error)
+        
       else:
-        my_data = self.is_file_or_dir_a(current_cmd.user_args)
-        self.handle_javascript(my_data, "a")
-      
-      self.cmd_looper(current_cmd, "UML Diagram generated ./uml.png")
+        try:
+          my_data = self.is_file_or_dir_a(current_cmd.user_args)
+          self.handle_javascript(my_data, "a")
+        except TypeError as t:
+          output = type_error_output + str(t)
+
+      self.cmd_looper(current_cmd, output)
 
     if user_command == "do_deserialize":
       my_serializer = Serializer() # WRAP in try / catch
@@ -175,25 +185,23 @@ class InputHandler():
       else:
         my_serializer.deserializer_a(deserialize_args)
 
-      self.cmd_looper(current_cmd, "deserialized data has been printed \n")
+      self.cmd_looper(current_cmd, "")
 
     # Quitter
     if user_command == "do_quit":
       return
 
 if __name__ == "__main__":
-  import sys
   input_handler = InputHandler()
   current_cmd = input_handler.cmd_b # Default CMD is Ethan's
-  # print(sys.argv[0]) # src\input_handler.py 0 or 1
-  if len(sys.argv) > 1:
-    if sys.argv[1] == "0":
+  # print(argv[0]) # src\input_handler.py 0 or 1
+  if len(argv) > 1:
+    if argv[1] == "0":
       input_handler.cmd_looper(input_handler.cmd_a, "Running Azez's cmd") # Azez CMD
-    if sys.argv[1] == "1":
+    if argv[1] == "1":
       input_handler.cmd_looper(input_handler.cmd_b, "Running Ethan's cmd") # Ethan CMD
 
   input_handler.cmd_looper(current_cmd, "Running Ethan's cmd")
-
 
     
 

@@ -54,8 +54,7 @@ class JavascriptHandler():
             for method in my_methods:
                 current_method_value = ""
                 #if method.key.name == "constructor":
-
-            
+        
                 for e in method.value.body.body:
 
                     if method.key.name == "constructor":
@@ -67,6 +66,9 @@ class JavascriptHandler():
                             current_class_attribute_values.append(current_attribute_value)
 
                     #print(e.expression)
+                    if e.type == "VariableDeclaration" and e.declarations[0].init.type == "NewExpression":
+                            current_class["class_associations"].append(e.declarations[0].init.callee.name)
+
                     if e.expression != None:
                         if e.expression.right != None:
                             #print(e.expression.right)
@@ -99,6 +101,7 @@ class JavascriptHandler():
                 method_count = method_count + 1
 
                 for e in method.value.body.body:
+
                     if e.type == "ReturnStatement":
                         current_method_value = type(e.argument.value).__name__
 
@@ -107,15 +110,12 @@ class JavascriptHandler():
                 #print(current_method_value)
                 current_class_method_return_values.append(current_method_value)
 
- 
-
             current_class["class_methods"] = current_class_methods
             current_class["class_method_values"] = current_class_method_return_values
             #print(current_class_method_params)
             current_class["class_method_params"] = current_class_method_params
                 #overall_class_methods.append(current_class_methods)
             my_classes.append(current_class)
-
 
 
         #current_class_attributes = my_ast.body[0].body.body[0].value.body.body[0].expression.left.object.type #.value.params
@@ -160,6 +160,9 @@ class JavascriptHandler():
 
                         if an_expression.type == "ReturnStatement":
                                 new_method["return_type"] = f' : {type(an_expression.argument.value).__name__}'
+
+                        if an_expression.type == "VariableDeclaration" and an_expression.declarations[0].init.type == "NewExpression":
+                            class_dict["class_calls"].append(an_expression.declarations[0].init.callee.name)
                         
                         if an_expression.expression != None:
                             left_value = an_expression.expression.left

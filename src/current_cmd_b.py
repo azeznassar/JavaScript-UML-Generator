@@ -21,7 +21,14 @@ class CurrentCMD_B(CommandLine):
         return True
 
     def do_info(self, args):
-        print("Ethans info")
+        print("""
+            JS2UML: Generate UML 2 Class Diagrams from JavaScript file(s)
+
+            The software was developed by Azez Nassar & Ethan Bray in Python3
+            Version: 1.0
+
+            Source: https://github.com/azeznassar/JavaScript-UML-Generator
+             """)
 
     def do_quit(self, args):
         print("Leaving System")
