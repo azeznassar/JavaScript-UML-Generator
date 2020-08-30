@@ -66,7 +66,7 @@ class CurrentCMD_A(CommandLine):
 
 
                 deserialize:
-                    usage: deserialize [-delete]
+                    usage: deserialize [-d]
                     Display the deserialized JavaScript class information that is serialized from the create_uml command
 
                 optional arguments:
