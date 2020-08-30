@@ -35,14 +35,6 @@ $ npm install
 
 ```
 
-Install the [Graphviz](https://graphviz.org/download/) package .bin to the following path:
-
-```
-
-D:/Program Files (x86)/Graphviz/bin/
-
-```
-
 ## Usage
 
 ```sh

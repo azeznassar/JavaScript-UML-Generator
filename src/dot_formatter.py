@@ -10,7 +10,7 @@ class DotFormatter():
         self.js_ast = new_js
     
     def convert_to_dot_a(self):
-        environ["PATH"] += pathsep + 'D:/Program Files (x86)/Graphviz/bin/'
+        environ["PATH"] += pathsep + './Graphviz/bin/'
         js_data = self.js_ast
         dot = Digraph(name="G", node_attr={'shape' : 'record'}, format="png")
         
@@ -42,7 +42,7 @@ class DotFormatter():
                     #print(attrib_value)
                 if attrib_type == "NoneType":
                     attrib_type = ""
-                current_class_label += f' : {attrib_type}\l'
+                current_class_label += f' : {attrib_type}\\l'
                 count = count + 1
 
             current_class_label += "| "
@@ -56,7 +56,7 @@ class DotFormatter():
                     method_params += param + ', '
                     #print(param)
                 
-                current_class_label += f"({method_params}) : {current_class_method_values[count]}\l" #.format()
+                current_class_label += f"({method_params}) : {current_class_method_values[count]}\\l" #.format()
                 count = count + 1
 
             for relationship in current_class_associations:
@@ -88,13 +88,13 @@ class DotFormatter():
             all_relationships = ''
 
             for a_attribute, a_attribute_type in zip(a_class["attributes"], a_class["attribute_types"]):
-                all_attributes += "{0} {1} \l".format(a_attribute, a_attribute_type)
+                all_attributes += "{0} {1} \\l".format(a_attribute, a_attribute_type)
             
             for a_method in a_class["methods"]:
                 all_parameters = ''
                 for a_parameter in a_method["parameters"]:
                     all_parameters += f"{a_parameter}, "
-                all_methods += '{0}({1}){2}\l'.format(a_method["name"], all_parameters, a_method["return_type"])
+                all_methods += '{0}({1}){2}\\l'.format(a_method["name"], all_parameters, a_method["return_type"])
 
             for a_relationship in a_class["class_calls"]:
                 all_relationships += f'{a_class["class_name"]} -> {a_relationship}\n'
