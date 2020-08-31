@@ -198,7 +198,7 @@ class InputHandler():
 
 if __name__ == "__main__":
     input_handler = InputHandler()
-    current_cmd = input_handler.cmd_b  # Default CMD is Ethan's
+    current_cmd = input_handler.cmd_a  # Default CMD is Azez's
     # print(argv[0]) # src\input_handler.py 0 or 1
     if len(argv) > 1:
         if argv[1] == "0":
@@ -208,4 +208,4 @@ if __name__ == "__main__":
             input_handler.cmd_looper(
                 input_handler.cmd_b, "Running Ethan's cmd")  # Ethan CMD
 
-    input_handler.cmd_looper(current_cmd, "Running Ethan's cmd")
+    input_handler.cmd_looper(current_cmd, "Running Azez's cmd")
