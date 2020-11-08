@@ -23,7 +23,7 @@ Create and activate a virtual environment:
 
 $ python -m venv venv
 
-$ source venv/bin/activate # OR venv\Scripts\Activate.ps1 for windows/PS
+$ source venv/bin/activate # OR venv\Scripts\Activate.ps1 for windows/PS (.bat for terminal)
 
 ```
 

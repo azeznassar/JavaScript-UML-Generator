@@ -5,8 +5,8 @@ http://www.drdobbs.com/testing/unit-testing-with-python/240165163?pgno=1
 https://docs.python.org/3/library/unittest.html
 """
 
-from tests.test_current_cmd_a import CmdATests
-from tests.test_input_handler import InputHandlerTests
+from tests import CmdATests
+from tests import InputHandlerTests
 
 import unittest
 
