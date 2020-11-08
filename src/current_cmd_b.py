@@ -2,8 +2,8 @@
 # Ethan's CMD
 
 # pylint: disable="import-error"
-from command_line import CommandLine
-from serializer import Serializer
+from src.command_line import CommandLine
+from src.serializer import Serializer
 
 
 class CurrentCMD_B(CommandLine):

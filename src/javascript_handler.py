@@ -1,6 +1,6 @@
 
 from esprima import tokenize, parseScript
-from dot_formatter import DotFormatter
+from src.dot_formatter import DotFormatter
 
 
 class JavascriptHandler():

@@ -2,11 +2,11 @@
 # Input Handler
 
 # pylint: disable="import-error"
-from current_cmd_a import CurrentCMD_A
-from current_cmd_b import CurrentCMD_B
-from javascript_handler import JavascriptHandler
+from src.current_cmd_a import CurrentCMD_A
+from src.current_cmd_b import CurrentCMD_B
+from src.javascript_handler import JavascriptHandler
 # 3rd party imports
-from serializer import Serializer
+from src.serializer import Serializer
 from esprima import tokenize, parseScript
 from plantuml import PlantUML
 from re import search
@@ -141,7 +141,7 @@ class InputHandler():
 
         my_javascript.create_puml()
 
-    def cmd_looper(self, current_cmd, output):
+    def cmd_looper(self, current_cmd, output, input_handler):
         current_cmd.cmdloop(intro=output)
 
         user_command = current_cmd.current_command
@@ -155,7 +155,7 @@ class InputHandler():
             else:
                 current_cmd = input_handler.cmd_b
             current_cmd.current_command = ""
-            self.cmd_looper(current_cmd, "CMD Switched")
+            self.cmd_looper(current_cmd, "CMD Switched", input_handler)
 
         # JS file checker
         if user_command == "do_create_uml":
@@ -179,7 +179,7 @@ class InputHandler():
                 except TypeError as t:
                     output = type_error_output + str(t)
 
-            self.cmd_looper(current_cmd, output)
+            self.cmd_looper(current_cmd, output, input_handler)
 
         if user_command == "do_deserialize":
             my_serializer = Serializer()  # WRAP in try / catch
@@ -189,7 +189,7 @@ class InputHandler():
             else:
                 my_serializer.deserializer_a(deserialize_args)
 
-            self.cmd_looper(current_cmd, "")
+            self.cmd_looper(current_cmd, "", input_handler)
 
         # Quitter
         if user_command == "do_quit":
@@ -203,9 +203,9 @@ if __name__ == "__main__":
     if len(argv) > 1:
         if argv[1] == "0":
             input_handler.cmd_looper(
-                input_handler.cmd_a, "Running Azez's cmd")  # Azez CMD
+                input_handler.cmd_a, "Running Azez's cmd", input_handler)  # Azez CMD
         if argv[1] == "1":
             input_handler.cmd_looper(
-                input_handler.cmd_b, "Running Ethan's cmd")  # Ethan CMD
+                input_handler.cmd_b, "Running Ethan's cmd", input_handler)  # Ethan CMD
 
-    input_handler.cmd_looper(current_cmd, "Running Azez's cmd")
+    input_handler.cmd_looper(current_cmd, "Running Azez's cmd", input_handler)

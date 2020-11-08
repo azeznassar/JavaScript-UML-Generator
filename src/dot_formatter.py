@@ -1,6 +1,6 @@
 
 # pylint: disable="import-error"
-from image_converter import ImageConverter
+from src.image_converter import ImageConverter
 from graphviz import Digraph
 from os import pathsep, environ
 
