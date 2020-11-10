@@ -1,14 +1,15 @@
 import unittest
 
-from src.current_cmd_a import CurrentCMD_A
+# pylint: disable="import-error"
+from current_cmd_a import CurrentCMD_A
 
 
 class CmdATests(unittest.TestCase):
     def setUp(self):
-        self.foo = CurrentCMD_A()   
+        self.cmd_a = CurrentCMD_A()   
 
-    # def test_three(self):
-    #     self.assertEqual(True)
+    def test_one(self):
+        self.assertEqual(True, True, "This shows if test fails")
 
     def tearDown(self):
         print("This CmdATests test case is done!")

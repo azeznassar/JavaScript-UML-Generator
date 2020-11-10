@@ -48,14 +48,14 @@ Run the program:
 
 ```sh
 
-$ python src/input_handler.py
+$ python input_handler.py
 
 ```
 
 ## Usage
 
 ```sh
-python src/input_handler.py [0] or [1]
+python input_handler.py [0] or [1]
 ```
 0 and 1 are optional arguments which start the program within Azez's or Ethan's implementation (Opens within Azez's by default when no argument is given)
 

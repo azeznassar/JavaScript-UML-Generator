@@ -1,5 +1,6 @@
 import unittest
-from src.input_handler import InputHandler
+# pylint: disable="import-error"
+from input_handler import InputHandler
 
 
 class InputHandlerTests(unittest.TestCase):

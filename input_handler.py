@@ -2,11 +2,11 @@
 # Input Handler
 
 # pylint: disable="import-error"
-from src.current_cmd_a import CurrentCMD_A
-from src.current_cmd_b import CurrentCMD_B
-from src.javascript_handler import JavascriptHandler
+from current_cmd_a import CurrentCMD_A
+from current_cmd_b import CurrentCMD_B
+from javascript_handler import JavascriptHandler
 # 3rd party imports
-from src.serializer import Serializer
+from serializer import Serializer
 from esprima import tokenize, parseScript
 from plantuml import PlantUML
 from re import search
