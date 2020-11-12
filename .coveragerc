@@ -2,3 +2,4 @@
 omit =
     # omit anything in a venv directory anywhere
     */venv/*
+    test_*.py
