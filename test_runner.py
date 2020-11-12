@@ -7,6 +7,7 @@ https://docs.python.org/3/library/unittest.html
 # pylint: disable="import-error"
 from test_current_cmd_a import CmdATests
 from test_input_handler import InputHandlerTests
+from test_current_cmd_b import CmdBTests
 
 import unittest
 
@@ -15,7 +16,8 @@ def suite():
     the_suite = unittest.TestSuite()
 
     the_suite.addTest(unittest.makeSuite(CmdATests))
-    the_suite.addTest(unittest.makeSuite(InputHandlerTests))
+    the_suite.addTest(unittest.makeSuite(CmdBTests))
+    # the_suite.addTest(unittest.makeSuite(InputHandlerTests))
     return the_suite
 
 
