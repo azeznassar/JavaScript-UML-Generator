@@ -8,11 +8,7 @@ from current_cmd_a import CurrentCMD_A
 
 class CmdATests(unittest.TestCase):
     def setUp(self):
-        self.cmd_a = CurrentCMD_A()   
-
-    # DELETE THIS METHOD
-    def test_example(self):
-        self.assertEqual(True, True, "This shows if test fails")
+        self.cmd_a = CurrentCMD_A("")   
 
     def test_cmd_a_help(self):
         out = StringIO()

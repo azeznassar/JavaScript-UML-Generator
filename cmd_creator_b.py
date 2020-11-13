@@ -5,5 +5,5 @@ from current_cmd_b import CurrentCMD_B
 class CmdCreatorB(CommandLineCreator):
     
     def create_cmd(self):
-        current_cmd = CurrentCMD_B()
+        current_cmd = CurrentCMD_B(self.output)
         return current_cmd

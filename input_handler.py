@@ -21,8 +21,8 @@ class InputHandler():
     """Handles User Commands that require action beyond basic cmd output"""
 
     def __init__(self):
-        self.cmd_a = CmdCreatorA().create_cmd()
-        self.cmd_b = CmdCreatorB().create_cmd()
+        self.cmd_a = CmdCreatorA("Running Azez's cmd").create_cmd()
+        self.cmd_b = CmdCreatorB("Running Ethan's cmd").create_cmd()
         # self.all_javascript = str
 
     # Ethan's
@@ -206,9 +206,9 @@ if __name__ == "__main__":
     if len(argv) > 1:
         if argv[1] == "0":
             input_handler.cmd_looper(
-                input_handler.cmd_a, "Running Azez's cmd", input_handler)  # Azez CMD
+                input_handler.cmd_a, input_handler.cmd_a.output, input_handler)  # Azez CMD
         if argv[1] == "1":
             input_handler.cmd_looper(
-                input_handler.cmd_b, "Running Ethan's cmd", input_handler)  # Ethan CMD
+                input_handler.cmd_b, input_handler.cmd_b.output, input_handler)  # Ethan CMD
 
-    input_handler.cmd_looper(current_cmd, "Running Azez's cmd", input_handler)
+    input_handler.cmd_looper(current_cmd, input_handler.cmd_a.output, input_handler)

@@ -8,8 +8,9 @@ from serializer import Serializer
 
 class CurrentCMD_B(CommandLine):
 
-    def __init__(self):
+    def __init__(self, output):
         CommandLine.__init__(self)
+        self.output = output
 
     def do_create_uml(self, args):
         self.current_command = "do_create_uml"
