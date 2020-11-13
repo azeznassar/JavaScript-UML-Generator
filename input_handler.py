@@ -2,9 +2,10 @@
 # Input Handler
 
 # pylint: disable="import-error"
-from current_cmd_a import CurrentCMD_A
-from current_cmd_b import CurrentCMD_B
 from javascript_handler import JavascriptHandler
+from cmd_creator_a import CmdCreatorA
+from cmd_creator_b import CmdCreatorB
+
 # 3rd party imports
 from serializer import Serializer
 from esprima import tokenize, parseScript
@@ -15,12 +16,13 @@ from execjs import get
 from sys import argv
 
 
+
 class InputHandler():
     """Handles User Commands that require action beyond basic cmd output"""
 
     def __init__(self):
-        self.cmd_a = CurrentCMD_A()
-        self.cmd_b = CurrentCMD_B()
+        self.cmd_a = CmdCreatorA().create_cmd()
+        self.cmd_b = CmdCreatorB().create_cmd()
         # self.all_javascript = str
 
     # Ethan's
@@ -199,6 +201,7 @@ class InputHandler():
 if __name__ == "__main__":
     input_handler = InputHandler()
     current_cmd = input_handler.cmd_a  # Default CMD is Azez's
+    
     # print(argv[0]) # src\input_handler.py 0 or 1
     if len(argv) > 1:
         if argv[1] == "0":
