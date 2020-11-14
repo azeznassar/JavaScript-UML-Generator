@@ -6,7 +6,6 @@ class Cat {
   
     speak (words) {
       let dog = new Dog('Name', 123)
-  
       return 34
     }
   
@@ -31,6 +30,7 @@ class Cat {
     constructor (dogName, dogAge) {
       this.dogName = 'test-string'
       this.dogAge = 0
+      this.catFriend = new Cat("Patchy", 29)
     }
   
     speak () {
