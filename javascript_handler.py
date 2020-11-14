@@ -168,6 +168,17 @@ class JavascriptHandler():
         all_js_classes = []
 
         for a_class in js_ast.body:
+            builder_b = ClassInfoBuilderB()
+            director = ClassDirector(builder_b)
+            current_input = {
+                "name":"", # Done 
+                "attribute_types": [],
+                "attribute_values": [],
+                "method": [],
+                "parent": "", # Done 
+                "associations": [] # Done
+            }
+
             class_dict = {"class_name": "",
                           "attributes": [],
                           "attribute_types": [],
@@ -177,9 +188,11 @@ class JavascriptHandler():
 
             if a_class.type == "ClassDeclaration":
                 class_dict["class_name"] = a_class.id.name
+                current_input["name"] = a_class.id.name
 
                 if a_class.superClass != None:
                     class_dict["inherits_from"] = a_class.superClass.name
+                    current_input["parent"] = a_class.superClass.name
 
                 for a_method in a_class.body.body:
                     new_method = {"name": "",
@@ -199,6 +212,8 @@ class JavascriptHandler():
                         if e_type and an_expression.declarations[0].init.type == "NewExpression":
                             class_dict["class_calls"].append(
                                 an_expression.declarations[0].init.callee.name)
+                            current_input["associations"].append(
+                                an_expression.declarations[0].init.callee.name)
 
                         if an_expression.expression != None:
                             left_value = an_expression.expression.left
@@ -208,6 +223,8 @@ class JavascriptHandler():
                                 if left_value.object.type == "ThisExpression":
                                     class_dict["attributes"].append(
                                         left_value.property.name)
+                                    current_input["attribute_values"].append(
+                                        left_value.property.name)
                                     # Grabs attribute types - Gives empty string if no type value given
                                     attribute_value = right_value.value
                                     if isinstance(attribute_value, type(None)):
@@ -216,13 +233,21 @@ class JavascriptHandler():
                                         value_type = f' : {type(attribute_value).__name__}'
                                     class_dict["attribute_types"].append(
                                         value_type)
+                                    current_input["attribute_types"].append(
+                                        value_type)
 
                             if right_value != None and right_value.type == "NewExpression":
                                 class_dict["class_calls"].append(
                                     right_value.callee.name)
+                                current_input["associations"].append(
+                                    right_value.callee.name)
                     class_dict["methods"].append(new_method)
+                    current_input["method"].append(new_method)
 
-            all_js_classes.append(class_dict)
+            
+            director.construct(current_input)
+            all_js_classes.append(builder_b.get_result())
+           # all_js_classes.append(class_dict)
 
         self.js_code = all_js_classes
 
