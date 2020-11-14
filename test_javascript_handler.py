@@ -6,19 +6,20 @@ from javascript_handler import JavascriptHandler
 
 test_js = ""
 
+
 class JavaScriptHandlerTests(unittest.TestCase):
     def setUp(self):
         global test_js
         with open('test.js') as js_file:
                 js = js_file.read()
-                test_js += js + ' \n' 
+                test_js += js + ' \n'
 
     def test_extract_javascript_a(self):
         self.js_handler = JavascriptHandler(test_js, "a")
         current_value = self.js_handler.js_code
         self.js_handler.extract_javascript_a()
         new_value = self.js_handler.js_code
-        # Expect handler.js_code to have changed after extract_javascript method called 
+        # Expect handler.js_code to have changed after extract_javascript method called
         self.assertNotEqual(current_value, new_value, "extract javascript a test failed")
 
     def test_extract_javascript_b(self):
@@ -26,7 +27,7 @@ class JavaScriptHandlerTests(unittest.TestCase):
         current_value = self.js_handler.js_code
         self.js_handler.extract_javascript_b()
         new_value = self.js_handler.js_code
-        # Expect js_handler.js_code to have changed after extract_javascript method called 
+        # Expect js_handler.js_code to have changed after extract_javascript method called
         self.assertNotEqual(current_value, new_value, "extract javascript a test failed")
 
     @patch('dot_formatter.DotFormatter.convert_to_dot_a')

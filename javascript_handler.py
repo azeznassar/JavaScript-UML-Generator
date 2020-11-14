@@ -133,7 +133,6 @@ class JavascriptHandler():
             director.construct(current_input)
 
             # my_classes.append(current_class)
-            # TODO: Test it actaully works in current state then remove current_class ???? then do ethans
             my_classes.append(builder_a.get_result())
 
     

@@ -8,7 +8,7 @@ from current_cmd_a import CurrentCMD_A
 
 class CmdATests(unittest.TestCase):
     def setUp(self):
-        self.cmd_a = CurrentCMD_A("Azez")   
+        self.cmd_a = CurrentCMD_A("Azez")
 
     def test_cmd_a_help(self):
         out = StringIO()

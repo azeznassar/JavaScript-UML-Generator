@@ -7,7 +7,7 @@ from current_cmd_b import CurrentCMD_B
 
 class CmdBTests(unittest.TestCase):
     def setUp(self):
-        self.cmd_b = CurrentCMD_B("Ethan")   
+        self.cmd_b = CurrentCMD_B("Ethan")
 
     def test_cmd_b_help(self):
         import sys
@@ -19,12 +19,11 @@ class CmdBTests(unittest.TestCase):
 
         output = out.getvalue().strip()
         assert 'Deletes the serialized file(s) after printing data' in output
-    
+
     def test_cmd_b_create_uml(self):
         self.cmd_b.do_create_uml(None)
         self.assertEqual(self.cmd_b.current_command, "do_create_uml", "create_uml test failed")
         self.assertTrue(self.cmd_b.do_create_uml(None), "create_uml test failed")
-
 
     def test_cmd_b_deserialize(self):
         self.cmd_b.do_deserialize(None)
@@ -68,8 +67,6 @@ class CmdBTests(unittest.TestCase):
 
         output = out.getvalue().strip()
         assert "Sorry, the command:" in output
-
-
 
 
 if __name__ == '__main__':
