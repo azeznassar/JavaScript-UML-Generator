@@ -39,18 +39,7 @@ class JavascriptHandler():
                 "associations": [] # Done
             }
 
-            current_class = {
-                "class_name": "", 
-                "class_attributes": [],
-                "class_attribute_values": [],
-                "class_methods": [],
-                "class_method_values": [],
-                "class_method_params": {},  # MAKE INTO DICT
-                "class_associations": [],
-                "class_parent": ""
-            }
 
-            current_class["class_name"] = a_class.id.name
             current_input["name"] = a_class.id.name
 
             # my_classes.append(a_class.id.name)
@@ -68,7 +57,6 @@ class JavascriptHandler():
             method_count = 0
 
             if a_class.superClass != None:
-                current_class["class_parent"] = a_class.superClass.name
                 current_input["parent"] = a_class.superClass.name
                 # print(current_class["class_parent"])
 
@@ -89,8 +77,6 @@ class JavascriptHandler():
 
                     is_var = e.type == "VariableDeclaration"
                     if is_var and e.declarations[0].init.type == "NewExpression":
-                        current_class["class_associations"].append(
-                            e.declarations[0].init.callee.name)
                         current_input["associations"].append(
                             e.declarations[0].init.callee.name)
 
@@ -99,18 +85,13 @@ class JavascriptHandler():
                             # print(e.expression.right)
                             if e.expression.right.type == "NewExpression":
                                 # print(e.expression.right.callee.name)
-                                current_class["class_associations"].append(
-                                    e.expression.right.callee.name)
                                 current_input["associations"].append(
                                     e.expression.right.callee.name)
 
-                current_class["class_attributes"] = current_class_attributes
                 current_input["attribute_types"] = current_class_attributes
 
-                current_class["class_attribute_values"] = current_class_attribute_values
                 current_input["attribute_values"] = current_class_attribute_values
 
-                current_class["class_associations"] = current_class_associations
                 current_input["associations"] = current_class_associations
 
                 overall_class_attributes.append(current_class_attributes)
@@ -143,13 +124,10 @@ class JavascriptHandler():
                 # print(current_method_value)
                 current_class_method_return_values.append(current_method_value)
 
-            current_class["class_methods"] = current_class_methods
             current_input["method"]["methods"] = current_class_methods
 
-            current_class["class_method_values"] = current_class_method_return_values
             current_input["method"]["values"] = current_class_method_return_values
             # print(current_class_method_params)
-            current_class["class_method_params"] = current_class_method_params
             current_input["method"]["params"] = current_class_method_params
             # overall_class_methods.append(current_class_methods)
             director.construct(current_input)
@@ -179,19 +157,11 @@ class JavascriptHandler():
                 "associations": [] # Done
             }
 
-            class_dict = {"class_name": "",
-                          "attributes": [],
-                          "attribute_types": [],
-                          "methods": [],
-                          "class_calls": [],
-                          "inherits_from": ""}
 
             if a_class.type == "ClassDeclaration":
-                class_dict["class_name"] = a_class.id.name
                 current_input["name"] = a_class.id.name
 
                 if a_class.superClass != None:
-                    class_dict["inherits_from"] = a_class.superClass.name
                     current_input["parent"] = a_class.superClass.name
 
                 for a_method in a_class.body.body:
@@ -210,8 +180,6 @@ class JavascriptHandler():
 
                         e_type = an_expression.type == "VariableDeclaration"
                         if e_type and an_expression.declarations[0].init.type == "NewExpression":
-                            class_dict["class_calls"].append(
-                                an_expression.declarations[0].init.callee.name)
                             current_input["associations"].append(
                                 an_expression.declarations[0].init.callee.name)
 
@@ -221,8 +189,6 @@ class JavascriptHandler():
 
                             if a_method.key.name == "constructor":  # Grab Attributes of constructor
                                 if left_value.object.type == "ThisExpression":
-                                    class_dict["attributes"].append(
-                                        left_value.property.name)
                                     current_input["attribute_values"].append(
                                         left_value.property.name)
                                     # Grabs attribute types - Gives empty string if no type value given
@@ -231,17 +197,12 @@ class JavascriptHandler():
                                         value_type = ""
                                     else:
                                         value_type = f' : {type(attribute_value).__name__}'
-                                    class_dict["attribute_types"].append(
-                                        value_type)
                                     current_input["attribute_types"].append(
                                         value_type)
 
                             if right_value != None and right_value.type == "NewExpression":
-                                class_dict["class_calls"].append(
-                                    right_value.callee.name)
                                 current_input["associations"].append(
                                     right_value.callee.name)
-                    class_dict["methods"].append(new_method)
                     current_input["method"].append(new_method)
 
             
