@@ -7,7 +7,7 @@ from current_cmd_b import CurrentCMD_B
 
 class CmdBTests(unittest.TestCase):
     def setUp(self):
-        self.cmd_b = CurrentCMD_B("")   
+        self.cmd_b = CurrentCMD_B("Ethan")   
 
     def test_cmd_b_help(self):
         import sys

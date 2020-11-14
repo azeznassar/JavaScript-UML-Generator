@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for dot_formatter.py: 8%</title>
+    <title>Coverage for dot_formatter.py: 11%</title>
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.hotkeys.js"></script>
@@ -17,13 +17,13 @@
 <div id="header">
     <div class="content">
         <h1>Coverage for <b>dot_formatter.py</b> :
-            <span class="pc_cov">8%</span>
+            <span class="pc_cov">11%</span>
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             75 statements &nbsp;
-            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">8 run</button>
-            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">67 missing</button>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">11 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">64 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
             <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">0 partial</button>
         </h2>
@@ -62,7 +62,7 @@
     <p id="t8" class="run"><span class="n"><a href="#t8">8</a></span><span class="t"><span class="key">class</span> <span class="nam">DotFormatter</span><span class="op">(</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t9" class="pln"><span class="n"><a href="#t9">9</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t10" class="run"><span class="n"><a href="#t10">10</a></span><span class="t">    <span class="key">def</span> <span class="nam">__init__</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">new_js</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t11" class="mis show_mis"><span class="n"><a href="#t11">11</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">js_ast</span> <span class="op">=</span> <span class="nam">new_js</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t11" class="run"><span class="n"><a href="#t11">11</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">js_ast</span> <span class="op">=</span> <span class="nam">new_js</span>&nbsp;</span><span class="r"></span></p>
     <p id="t12" class="pln"><span class="n"><a href="#t12">12</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t13" class="run"><span class="n"><a href="#t13">13</a></span><span class="t">    <span class="key">def</span> <span class="nam">convert_to_dot_a</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t14" class="mis show_mis"><span class="n"><a href="#t14">14</a></span><span class="t">        <span class="nam">environ</span><span class="op">[</span><span class="str">"PATH"</span><span class="op">]</span> <span class="op">+=</span> <span class="nam">pathsep</span> <span class="op">+</span> <span class="str">'./Graphviz/bin/'</span>&nbsp;</span><span class="r"></span></p>
@@ -170,14 +170,14 @@
     <p id="t116" class="pln"><span class="n"><a href="#t116">116</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t117" class="pln"><span class="n"><a href="#t117">117</a></span><span class="t">    <span class="com"># Shared Methods</span>&nbsp;</span><span class="r"></span></p>
     <p id="t118" class="run"><span class="n"><a href="#t118">118</a></span><span class="t">    <span class="key">def</span> <span class="nam">handle_dot_file</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">current_cmd</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t119" class="mis show_mis"><span class="n"><a href="#t119">119</a></span><span class="t">        <span class="nam">the_image_converter</span> <span class="op">=</span> <span class="nam">ImageConverter</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t120" class="mis show_mis"><span class="n"><a href="#t120">120</a></span><span class="t">        <span class="nam">the_image_converter</span><span class="op">.</span><span class="nam">produce_image_b</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t119" class="run"><span class="n"><a href="#t119">119</a></span><span class="t">        <span class="nam">the_image_converter</span> <span class="op">=</span> <span class="nam">ImageConverter</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t120" class="run"><span class="n"><a href="#t120">120</a></span><span class="t">        <span class="nam">the_image_converter</span><span class="op">.</span><span class="nam">produce_image_b</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
 </div>
 <div id="footer">
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.3</a>,
-            created at 2020-11-12 15:28 +1300
+            created at 2020-11-14 14:57 +1300
         </p>
     </div>
 </div>
