@@ -1,3 +1,7 @@
+# pylint: disable="import-error"
+from class_info_builder_a import ClassInfoBuilderA
+from class_info_builder_b import ClassInfoBuilderB
+from class_director import ClassDirector
 
 from esprima import tokenize, parseScript
 from dot_formatter import DotFormatter
@@ -20,9 +24,23 @@ class JavascriptHandler():
         count = 0
 
         for a_class in my_ast.body:
+            builder_a = ClassInfoBuilderA()
+            director = ClassDirector(builder_a)
+            current_input = {
+                "name":"", # Done 
+                "attribute_types": [],
+                "attribute_values": [],
+                "method": { # done
+                    "methods": [],
+                    "values": [],
+                    "params": {}
+                },
+                "parent": "", # Done 
+                "associations": [] # Done
+            }
 
             current_class = {
-                "class_name": "",
+                "class_name": "", 
                 "class_attributes": [],
                 "class_attribute_values": [],
                 "class_methods": [],
@@ -33,6 +51,7 @@ class JavascriptHandler():
             }
 
             current_class["class_name"] = a_class.id.name
+            current_input["name"] = a_class.id.name
 
             # my_classes.append(a_class.id.name)
             my_methods = my_ast.body[count].body.body
@@ -50,6 +69,7 @@ class JavascriptHandler():
 
             if a_class.superClass != None:
                 current_class["class_parent"] = a_class.superClass.name
+                current_input["parent"] = a_class.superClass.name
                 # print(current_class["class_parent"])
 
             for method in my_methods:
@@ -71,6 +91,8 @@ class JavascriptHandler():
                     if is_var and e.declarations[0].init.type == "NewExpression":
                         current_class["class_associations"].append(
                             e.declarations[0].init.callee.name)
+                        current_input["associations"].append(
+                            e.declarations[0].init.callee.name)
 
                     if e.expression != None:
                         if e.expression.right != None:
@@ -79,10 +101,18 @@ class JavascriptHandler():
                                 # print(e.expression.right.callee.name)
                                 current_class["class_associations"].append(
                                     e.expression.right.callee.name)
+                                current_input["associations"].append(
+                                    e.expression.right.callee.name)
 
                 current_class["class_attributes"] = current_class_attributes
+                current_input["attribute_types"] = current_class_attributes
+
                 current_class["class_attribute_values"] = current_class_attribute_values
+                current_input["attribute_values"] = current_class_attribute_values
+
                 current_class["class_associations"] = current_class_associations
+                current_input["associations"] = current_class_associations
+
                 overall_class_attributes.append(current_class_attributes)
 
                 current_class_methods.append(method.key.name)
@@ -114,11 +144,20 @@ class JavascriptHandler():
                 current_class_method_return_values.append(current_method_value)
 
             current_class["class_methods"] = current_class_methods
+            current_input["method"]["methods"] = current_class_methods
+
             current_class["class_method_values"] = current_class_method_return_values
+            current_input["method"]["values"] = current_class_method_return_values
             # print(current_class_method_params)
             current_class["class_method_params"] = current_class_method_params
+            current_input["method"]["params"] = current_class_method_params
             # overall_class_methods.append(current_class_methods)
-            my_classes.append(current_class)
+            director.construct(current_input)
+
+            # my_classes.append(current_class)
+            # TODO: Test it actaully works in current state then remove current_class ???? then do ethans
+            my_classes.append(builder_a.get_result())
+
     
         self.js_code = my_classes
 
